@@ -1,0 +1,11 @@
+# contruil.com - Marketing site
+# Allow indexing of public marketing content
+# Block any future internal/admin routes
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+
+Sitemap: https://contruil.com/sitemap.xml
