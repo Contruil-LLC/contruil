@@ -50,11 +50,48 @@ export default function Home() {
       <section id="what-we-do" className="py-20 px-6 border-t border-white/5">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-4">What We Do</h2>
-          <p className="text-brand-muted mb-12 max-w-2xl leading-relaxed">
+          <p className="text-brand-muted mb-8 max-w-2xl leading-relaxed">
             Most enterprises today run multiple AI providers across departments.
             Each one handles sensitive data differently, costs differently, and
             fails differently. Nobody has a unified view. Contruil fixes that.
           </p>
+          {/* Before/After Comparison */}
+          <div className="overflow-x-auto rounded-lg border border-white/10">
+            <table className="w-full min-w-[600px] text-sm">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left py-4 px-4 font-semibold text-brand-muted">
+                    Without Contruil
+                  </th>
+                  <th className="text-left py-4 px-4 font-semibold text-brand-accent">
+                    With Contruil
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-brand-muted">
+                <tr className="border-b border-white/5">
+                  <td className="py-3 px-4">Each department picks its own AI vendors</td>
+                  <td className="py-3 px-4 text-brand-light">One governance layer across all providers</td>
+                </tr>
+                <tr className="border-b border-white/5">
+                  <td className="py-3 px-4">No visibility into AI spend by task type</td>
+                  <td className="py-3 px-4 text-brand-light">Cost-aware routing reduces waste by design</td>
+                </tr>
+                <tr className="border-b border-white/5">
+                  <td className="py-3 px-4">Compliance relies on vendor self-reporting</td>
+                  <td className="py-3 px-4 text-brand-light">Independent audit trail you control</td>
+                </tr>
+                <tr className="border-b border-white/5">
+                  <td className="py-3 px-4">AI incidents surface after the fact</td>
+                  <td className="py-3 px-4 text-brand-light">Real-time oversight catches drift early</td>
+                </tr>
+                <tr>
+                  <td className="py-3 px-4">&quot;We think it&apos;s compliant&quot;</td>
+                  <td className="py-3 px-4 text-brand-light">&quot;Here&apos;s the log — verify it yourself&quot;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
