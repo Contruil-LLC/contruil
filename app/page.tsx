@@ -55,6 +55,98 @@ export default function Home() {
             Each one handles sensitive data differently, costs differently, and
             fails differently. Nobody has a unified view. Contruil fixes that.
           </p>
+
+          {/* Before/After Comparison Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left py-4 px-4 text-sm font-semibold text-white/90">
+                    Dimension
+                  </th>
+                  <th className="text-left py-4 px-4 text-sm font-semibold text-brand-muted">
+                    Without Contruil
+                  </th>
+                  <th className="text-left py-4 px-4 text-sm font-semibold text-brand-accent">
+                    With Contruil
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-white/5">
+                  <td className="py-4 px-4 font-semibold text-white align-top">
+                    Visibility
+                  </td>
+                  <td className="py-4 px-4 text-sm text-brand-muted/70 align-top">
+                    Scattered dashboards, per-vendor reporting
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white/90 align-top">
+                    Unified view of every AI interaction across all providers
+                  </td>
+                </tr>
+                <tr className="border-b border-white/5">
+                  <td className="py-4 px-4 font-semibold text-white align-top">
+                    Routing
+                  </td>
+                  <td className="py-4 px-4 text-sm text-brand-muted/70 align-top">
+                    Teams pick models ad hoc; sensitive data may hit the wrong
+                    endpoint
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white/90 align-top">
+                    Automated classification routes by sensitivity and business
+                    purpose
+                  </td>
+                </tr>
+                <tr className="border-b border-white/5">
+                  <td className="py-4 px-4 font-semibold text-white align-top">
+                    Governance
+                  </td>
+                  <td className="py-4 px-4 text-sm text-brand-muted/70 align-top">
+                    Trust-based: "we assume the model behaves"
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white/90 align-top">
+                    Four-gate human validation before any critical AI action
+                  </td>
+                </tr>
+                <tr className="border-b border-white/5">
+                  <td className="py-4 px-4 font-semibold text-white align-top">
+                    Isolation
+                  </td>
+                  <td className="py-4 px-4 text-sm text-brand-muted/70 align-top">
+                    Shared API paths; regulated and general workloads co-mingle
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white/90 align-top">
+                    Segmented zones — regulated data never shares a pathway with
+                    general queries
+                  </td>
+                </tr>
+                <tr className="border-b border-white/5">
+                  <td className="py-4 px-4 font-semibold text-white align-top">
+                    Audit
+                  </td>
+                  <td className="py-4 px-4 text-sm text-brand-muted/70 align-top">
+                    Logs exist somewhere, maybe, if someone configured them
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white/90 align-top">
+                    Tamper-evident, cryptographically linked records ready for
+                    auditors
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-4 px-4 font-semibold text-white align-top">
+                    Oversight
+                  </td>
+                  <td className="py-4 px-4 text-sm text-brand-muted/70 align-top">
+                    Reactive: you find out after an incident
+                  </td>
+                  <td className="py-4 px-4 text-sm text-white/90 align-top">
+                    Continuous: real-time monitoring for drift, policy
+                    violations, and anomalies
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
