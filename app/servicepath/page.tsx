@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "ServicePath — Contruil",
   description:
-    "AI-powered chapter tracking and compliance for educational institutions. Patent-pending audit trail technology for NSLS and student organization management.",
+    "AI-powered skill development and compliance infrastructure. Four-Gate validation, tamper-evident audit trails. Education, Leadership Training, Compliance.",
 };
 
 export default function ServicePath() {
@@ -51,16 +51,30 @@ export default function ServicePath() {
             ServicePath
           </h1>
           <p className="text-lg text-brand-muted max-w-2xl leading-relaxed">
-            AI-powered chapter tracking and compliance infrastructure for
-            educational institutions. Built on patent-pending orchestration
-            and tamper-evident audit trail technology.
+            AI-powered skill development and compliance infrastructure. Every
+            vertical runs on Four-Gate validation, tamper-evident audit trails,
+            and DID-backed progress records. Education. Leadership Training. Compliance.
           </p>
+          <div className="flex flex-wrap gap-4 mt-8 text-sm font-mono">
+            <span className="px-3 py-1 rounded border border-brand-accent/30 text-brand-accent">
+              VERTICAL 01 — EDUCATION
+            </span>
+            <span className="px-3 py-1 rounded border border-brand-accent/30 text-brand-accent">
+              VERTICAL 02 — LEADERSHIP TRAINING
+            </span>
+            <span className="px-3 py-1 rounded border border-white/10 text-brand-muted">
+              VERTICAL 03 — COMPLIANCE (coming)
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* The Problem */}
+      {/* Vertical 01: Education — The Problem */}
       <section className="py-16 px-6 border-t border-white/5">
         <div className="max-w-4xl mx-auto">
+          <p className="text-brand-accent text-xs font-mono mb-2 tracking-wider uppercase">
+            VERTICAL 01 — EDUCATION
+          </p>
           <h2 className="text-2xl font-bold mb-6">The Problem</h2>
           <p className="text-brand-muted leading-relaxed mb-6">
             Student organizations and honor societies like NSLS track thousands
@@ -134,6 +148,62 @@ export default function ServicePath() {
               title="Accreditation-Ready Records"
               description="Tamper-evident audit trails that satisfy institutional review and accreditation requirements."
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Vertical 02: Negotiation Skills Module */}
+      <section className="py-16 px-6 border-t border-white/5 bg-brand-navy">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-brand-accent text-xs font-mono mb-2 tracking-wider uppercase">
+            VERTICAL 02 — LEADERSHIP TRAINING
+          </p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">
+            Negotiation Skills Module
+          </h2>
+          <p className="text-brand-muted leading-relaxed mb-8 max-w-2xl">
+            Scenario-based negotiation practice with Four-Gate validation applied
+            to skill development. Every practice session is logged in a tamper-evident
+            audit chain. Progress is verifiable. Credentials are blockchain-backed.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="p-6 rounded-lg border border-white/5 bg-brand-dark/50">
+              <h3 className="text-sm font-mono text-brand-accent mb-3 uppercase tracking-wider">
+                5 Scenario Types
+              </h3>
+              <ul className="text-brand-muted text-sm space-y-1.5">
+                <li>Salary negotiation</li>
+                <li>Business deals</li>
+                <li>Vendor/client relationships</li>
+                <li>Conflict resolution</li>
+                <li>Everyday negotiations</li>
+              </ul>
+            </div>
+            <div className="p-6 rounded-lg border border-white/5 bg-brand-dark/50">
+              <h3 className="text-sm font-mono text-brand-accent mb-3 uppercase tracking-wider">
+                Certification System
+              </h3>
+              <p className="text-brand-muted text-sm leading-relaxed mb-3">
+                Bronze → Silver → Gold → Platinum. Credentials backed by
+                tamper-evident records and optional blockchain verification.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-4 text-sm">
+            <span className="px-3 py-1.5 rounded border border-white/10 text-brand-muted">
+              Freemium: 5 scenarios/month
+            </span>
+            <span className="px-3 py-1.5 rounded border border-white/10 text-brand-muted">
+              Pro: $29/month
+            </span>
+            <span className="px-3 py-1.5 rounded border border-white/10 text-brand-muted">
+              Enterprise: Custom
+            </span>
+            <span className="px-3 py-1.5 rounded border border-brand-accent/30 text-brand-accent font-mono">
+              Q2 2026 beta — 50 NSLS + LinkedIn
+            </span>
           </div>
         </div>
       </section>
