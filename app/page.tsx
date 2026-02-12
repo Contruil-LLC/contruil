@@ -15,6 +15,9 @@ export default function Home() {
             <a href="#who-its-for" className="hover:text-white transition-colors">
               Who It&apos;s For
             </a>
+            <a href="/servicepath" className="hover:text-white transition-colors">
+              ServicePath
+            </a>
             <a
               href="mailto:timothy@contruil.com"
               className="px-4 py-2 bg-brand-accent text-white rounded-md hover:bg-blue-600 transition-colors"
