@@ -99,9 +99,50 @@ https://contruil.com/workplace-policy
 **Primary link (LinkedIn Workplace Module):**
 https://contruil.com/workplace-policy
 
-*Remote-first, control-driven. Least-privilege access, change-managed approvals, logged work artifacts. Not actively hiring full-time; contractors as needed. Contact: info@contruil.com*
+*Remote-first, control-driven. Least-privilege access, change-managed approvals, logged work artifacts. Community/education contributions (time-bound, verifiable). Not actively hiring full-time; contractors as needed. Contact: info@contruil.com*
 
 *Full policy (Notion):* https://www.notion.so/Contruil-Workplace-Policy-Public-061eb51b27bf4af3b9d0265840a0df77
+
+---
+
+## Supporting Materials (Links)
+
+*For directories, investor decks, and outreach — use these where "articles, blog posts, Company Pages, videos, podcasts" are requested.*
+
+### Company pages
+| Page | URL |
+|------|-----|
+| Homepage | https://contruil.com |
+| Pilot Fit Call | https://contruil.com/pilot-fit-call |
+| AI Governance Readiness Checklist | https://contruil.com/checklist |
+| Workplace Policy | https://contruil.com/workplace-policy |
+| ServicePath | https://contruil.com/servicepath |
+| Leadership Training | https://contruil.com/servicepath/leadership-training |
+| Negotiation Trainer | https://contruil.com/servicepath/leadership-training/trainer |
+| Compliance Architecture | https://contruil.com/servicepath/compliance-architecture |
+
+### Articles / newsletter (Awareness In Action series)
+| Resource | URL |
+|----------|-----|
+| Timothy Wheels (Awareness In Action) | https://timothywheels.com |
+| Newsletter / articles | *[Add specific article URLs from timothywheels.com as needed]* |
+| LinkedIn (Awareness In Action) | *[Add LinkedIn newsletter or article URLs]* |
+
+*Live process health checks, systemic audits, drift detection — aligns with governance/control narrative.*
+
+### Related
+| Resource | URL |
+|----------|-----|
+| CYW OS | https://cyw-os.com |
+| Sitemap | https://contruil.com/sitemap.xml |
+
+### Not yet available
+- Videos
+- Podcasts
+- Press coverage
+- Case studies (pending pilot outcomes)
+
+*Add these as they are created.*
 
 ---
 
@@ -109,6 +150,7 @@ https://contruil.com/workplace-policy
 
 - **CYW OS** — https://cyw-os.com (linked from Contruil site)
 - **ServicePath** — AI-powered skill development and compliance (contruil.com/servicepath)
+- **Timothy Wheels** — https://timothywheels.com (Awareness In Action newsletter, LinkedIn articles)
 
 ---
 

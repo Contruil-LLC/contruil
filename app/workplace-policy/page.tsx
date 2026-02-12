@@ -73,6 +73,27 @@ export default function WorkplacePolicyPage() {
           </div>
 
           <div>
+            <h2 className="text-lg font-semibold text-white mb-2">
+              Social impact (community benefit)
+            </h2>
+            <ul className="list-disc list-inside space-y-2">
+              <li>
+                We support community and education initiatives through time-bound,
+                verifiable contributions (service hours, mentoring, or pro bono
+                scoped work when capacity allows).
+              </li>
+              <li>
+                We document community-impact activities with clear scope, dates,
+                and third-party verification where feasible.
+              </li>
+              <li>
+                We do not represent informal intentions as commitments. Public
+                claims are backed by artifacts.
+              </li>
+            </ul>
+          </div>
+
+          <div>
             <h2 className="text-lg font-semibold text-white mb-2">Contact</h2>
             <p>
               For partnership, pilot, or contracting inquiries:{" "}
