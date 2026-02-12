@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PrintButton } from "@/components/PrintButton";
 
 export const metadata = {
   title: "AI Governance Readiness Checklist — Contruil",
@@ -72,13 +73,7 @@ export default function ChecklistPage() {
             >
               Pilot Fit Call
             </Link>
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="text-sm px-4 py-2 border border-white/20 text-brand-muted rounded-md hover:bg-white/5 hover:text-white transition-colors print:hidden"
-            >
-              Print / Save as PDF
-            </button>
+            <PrintButton />
           </div>
         </div>
       </nav>
