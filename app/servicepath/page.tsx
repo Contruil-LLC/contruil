@@ -26,6 +26,12 @@ export default function ServicePath() {
               ServicePath
             </a>
             <a
+              href="/servicepath/leadership-training"
+              className="hover:text-white transition-colors"
+            >
+              Leadership Training
+            </a>
+            <a
               href="/servicepath/compliance-architecture"
               className="hover:text-white transition-colors"
             >
@@ -201,9 +207,12 @@ export default function ServicePath() {
             <span className="px-3 py-1.5 rounded border border-white/10 text-brand-muted">
               Enterprise: Custom
             </span>
-            <span className="px-3 py-1.5 rounded border border-brand-accent/30 text-brand-accent font-mono">
-              Q2 2026 beta — 50 NSLS + LinkedIn
-            </span>
+            <a
+              href="/servicepath/leadership-training"
+              className="px-3 py-1.5 rounded border border-brand-accent/30 text-brand-accent font-mono hover:bg-brand-accent/10 transition-colors"
+            >
+              Q2 2026 beta — Learn more →
+            </a>
           </div>
         </div>
       </section>

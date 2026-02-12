@@ -23,6 +23,12 @@ export default function ComplianceArchitecture() {
               ServicePath
             </a>
             <a
+              href="/servicepath/leadership-training"
+              className="hover:text-white transition-colors"
+            >
+              Leadership Training
+            </a>
+            <a
               href="/servicepath/compliance-architecture"
               className="text-white"
             >
