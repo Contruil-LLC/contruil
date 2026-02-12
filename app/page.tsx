@@ -15,14 +15,17 @@ export default function Home() {
             <a href="#who-its-for" className="hover:text-white transition-colors">
               Who It&apos;s For
             </a>
+            <a href="#pilot-model" className="hover:text-white transition-colors">
+              Pilot
+            </a>
             <a href="/servicepath" className="hover:text-white transition-colors">
               ServicePath
             </a>
             <a
-              href="mailto:timothy@contruil.com"
+              href="/pilot-fit-call"
               className="px-4 py-2 bg-brand-accent text-white rounded-md hover:bg-blue-600 transition-colors"
             >
-              Contact
+              Schedule a 30-Minute Pilot Fit Call
             </a>
           </div>
         </div>
@@ -32,7 +35,7 @@ export default function Home() {
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-brand-accent text-sm font-mono mb-4 tracking-wider uppercase">
-            Patent Pending · U.S. 63/980,310
+            U.S. Patent Pending — Application No. 63/980,310
           </p>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
             One governance layer
@@ -41,11 +44,48 @@ export default function Home() {
             <br />
             <span className="text-brand-muted">you use.</span>
           </h1>
-          <p className="text-lg text-brand-muted max-w-2xl leading-relaxed">
+          <p className="text-lg text-brand-muted max-w-2xl leading-relaxed mb-2">
             Contruil gives enterprises visibility, control, and a verifiable
             audit trail across their entire AI estate — without replacing
             existing infrastructure.
           </p>
+          <p className="text-brand-muted max-w-2xl leading-relaxed mb-2">
+            Designed for API-driven financial platforms operating in high-change,
+            audit-accountable AI environments.
+          </p>
+          <p className="text-sm text-brand-muted max-w-2xl mb-2">
+            Financial services · Healthcare · Gov contractors · Large technology
+            firms
+          </p>
+          <p className="text-sm text-brand-muted max-w-2xl mb-6">
+            AI adoption is accelerating. Governance maturity rarely keeps pace.
+          </p>
+          <div className="space-y-4 mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 items-start">
+              <div>
+                <a
+                  href="/pilot-fit-call"
+                  className="inline-block px-6 py-3 bg-brand-accent text-white font-medium rounded-md hover:bg-blue-600 transition-colors text-center"
+                >
+                  Schedule a 30-Minute Pilot Fit Call
+                </a>
+                <p className="text-xs text-brand-muted mt-1">
+                  For API-driven financial platforms running multiple AI providers.
+                </p>
+              </div>
+              <div>
+                <a
+                  href="/checklist"
+                  className="inline-block px-6 py-3 border border-white/20 text-brand-muted font-medium rounded-md hover:bg-white/5 hover:text-white transition-colors text-center"
+                >
+                  Download the AI Governance Readiness Checklist
+                </a>
+                <p className="text-xs text-brand-muted mt-1">
+                  Pre-pilot self-assessment
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -78,15 +118,15 @@ export default function Home() {
                 </tr>
                 <tr className="border-b border-white/5">
                   <td className="py-3 px-4">No visibility into AI spend by task type</td>
-                  <td className="py-3 px-4 text-brand-light">Cost-aware routing reduces waste by design</td>
+                  <td className="py-3 px-4 text-brand-light">Cost-aware routing prioritizes lower-cost models for low-risk workloads while preserving governance controls</td>
                 </tr>
                 <tr className="border-b border-white/5">
                   <td className="py-3 px-4">Compliance relies on vendor self-reporting</td>
-                  <td className="py-3 px-4 text-brand-light">Independent audit trail you control</td>
+                  <td className="py-3 px-4 text-brand-light">Independently verifiable control log under your organization&apos;s authority</td>
                 </tr>
                 <tr className="border-b border-white/5">
                   <td className="py-3 px-4">AI incidents surface after the fact</td>
-                  <td className="py-3 px-4 text-brand-light">Real-time oversight catches drift early</td>
+                  <td className="py-3 px-4 text-brand-light">Continuous supervisory monitoring identifies policy drift before it becomes an exposure</td>
                 </tr>
                 <tr>
                   <td className="py-3 px-4">&quot;We think it&apos;s compliant&quot;</td>
@@ -94,6 +134,58 @@ export default function Home() {
                 </tr>
               </tbody>
             </table>
+          </div>
+          <p className="mt-6 text-sm text-brand-muted max-w-2xl leading-relaxed">
+            <strong className="text-brand-light">Deployment model:</strong> Contruil functions as a
+            supervisory control plane across AI providers, integrating at the API
+            layer without replacing your models or infrastructure.
+          </p>
+
+          {/* Infrastructure Fintech Pilot Program */}
+          <div id="pilot-model" className="mt-16 pt-16 border-t border-white/10">
+            <h2 className="text-2xl font-bold mb-3">Infrastructure Fintech Pilot Program</h2>
+            <p className="text-brand-muted mb-2 max-w-2xl leading-relaxed">
+              Contruil offers a structured 30–60 day pilot for API-driven financial
+              platforms operating multi-model AI environments under continuous
+              audit and vendor risk pressure.
+            </p>
+            <p className="text-sm text-brand-muted mb-6 max-w-2xl">
+              Initial pilot focus: financial services and infrastructure fintech
+              platforms.
+            </p>
+            <div className="grid md:grid-cols-2 gap-8 mb-6">
+              <div>
+                <h3 className="text-sm font-semibold text-brand-light mb-3">
+                  Designed for
+                </h3>
+                <ul className="text-sm text-brand-muted space-y-2 list-disc list-inside">
+                  <li>Platform Engineering</li>
+                  <li>Developer Experience</li>
+                  <li>Security &amp; Infrastructure</li>
+                  <li>Risk &amp; Compliance</li>
+                  <li>Vendor Risk &amp; Attestation Owners</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-brand-light mb-3">
+                  Pilot outcomes include
+                </h3>
+                <ul className="text-sm text-brand-muted space-y-2 list-disc list-inside">
+                  <li>Policy-based AI classification at the API boundary</li>
+                  <li>Supervisory monitoring across multi-model workflows</li>
+                  <li>Human-gated validation for sensitive production actions</li>
+                  <li>Independently verifiable control logs for customer and auditor review</li>
+                  <li>Executive-ready governance summary for internal and board-level stakeholders</li>
+                </ul>
+              </div>
+            </div>
+            <p className="text-sm text-brand-accent mb-3 max-w-2xl">
+              Built for high-change AI environments that still require audit
+              defensibility.
+            </p>
+            <p className="text-sm text-brand-muted max-w-2xl">
+              No model replacement. No vendor lock-in. Change-managed deployment.
+            </p>
           </div>
         </div>
       </section>
@@ -105,7 +197,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             <CapabilityCard
               title="Intelligent Request Routing"
-              description="Every AI interaction is classified by business purpose and data sensitivity before it touches a model. Low-risk tasks go to cost-efficient models. High-sensitivity work stays in controlled environments."
+              description="Every AI request is classified at the API boundary by business purpose and data sensitivity before it reaches a model. Low-risk tasks go to cost-efficient models. High-sensitivity work stays in controlled environments."
             />
             <CapabilityCard
               title="Workload Isolation"
@@ -120,10 +212,18 @@ export default function Home() {
               description="A supervisory control layer monitors for drift, policy violations, and anomalous behavior across your entire AI estate in real time. You see problems before they become incidents."
             />
             <CapabilityCard
-              title="Tamper-Evident Audit Trail"
+              title="Tamper-Evident AI Control Log"
               className="md:col-span-2 md:max-w-xl md:mx-auto"
-              description="Every significant AI interaction is recorded in a cryptographically linked log — who approved what, when, under which conditions, and which model executed it. When auditors ask, you have a verifiable answer."
+              description="A cryptographically linked control log records routing decisions, approvals, and execution context — suitable for internal review, customer attestation, and external audit."
             />
+          </div>
+          <div className="mt-12 text-center">
+            <a
+              href="/pilot-fit-call"
+              className="inline-block px-6 py-3 bg-brand-accent text-white font-medium rounded-md hover:bg-blue-600 transition-colors"
+            >
+              Schedule a 30-Minute Pilot Fit Call
+            </a>
           </div>
         </div>
       </section>
@@ -151,10 +251,63 @@ export default function Home() {
               answer="Tamper-evident records that hold up under audit, regulatory review, or litigation."
             />
           </div>
-          <p className="mt-12 text-brand-muted text-lg leading-relaxed">
+          <div className="mt-12 pt-12 border-t border-white/10">
+            <h3 className="text-xl font-semibold mb-4">
+              Signs you may need independent AI oversight
+            </h3>
+            <ul className="text-brand-muted space-y-2 list-disc list-inside mb-6">
+              <li>Multiple AI providers behind a unified API</li>
+              <li>Customer-facing AI workflows</li>
+              <li>Increasing vendor risk questionnaires referencing AI controls</li>
+              <li>No independent verification of routing or approvals</li>
+            </ul>
+            <p className="text-sm text-brand-muted mb-12">
+              If this applies, a pilot may be appropriate.
+            </p>
+            <h3 className="text-xl font-semibold mb-6">
+              Control questions every institution must answer
+            </h3>
+            <ol className="space-y-3 text-brand-muted list-decimal list-inside mb-6">
+              <li>Who approved this AI-driven decision?</li>
+              <li>Under which policy was it routed?</li>
+              <li>Which model processed it?</li>
+              <li>Can we reproduce the audit record on demand?</li>
+            </ol>
+            <p className="text-brand-light font-medium">
+              Contruil makes those answers immediate.
+            </p>
+          </div>
+          <p className="mt-12 text-brand-muted text-lg leading-relaxed mb-8">
             If your AI strategy has outgrown spreadsheets and trust-based vendor
             relationships, Contruil is the control layer you&apos;re missing.
           </p>
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="/pilot-fit-call"
+                className="inline-block px-6 py-3 bg-brand-accent text-white font-medium rounded-md hover:bg-blue-600 transition-colors text-center"
+              >
+                Schedule a 30-Minute Pilot Fit Call
+              </a>
+              <a
+                href="/checklist"
+                className="inline-block px-6 py-3 border border-white/20 text-brand-muted font-medium rounded-md hover:bg-white/5 hover:text-white transition-colors text-center"
+              >
+                Download the AI Governance Readiness Checklist
+              </a>
+            </div>
+            <div className="text-sm text-brand-muted">
+              <p className="font-medium text-brand-light mb-2">
+                Pilot Fit Indicators
+              </p>
+              <ul className="space-y-1">
+                <li>Multiple AI providers behind a unified API</li>
+                <li>Customer-facing AI outputs</li>
+                <li>Increasing vendor risk questionnaires referencing AI</li>
+                <li>No independent verification of routing or approvals</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -162,8 +315,8 @@ export default function Home() {
       <section className="py-16 px-6 bg-brand-navy border-t border-white/5">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm text-brand-muted leading-relaxed">
-            Certain orchestration and governance mechanisms in the Contruil
-            architecture are the subject of a pending U.S. patent application.
+            Certain aspects of the orchestration and governance architecture are
+            the subject of a pending U.S. patent application.
           </p>
           <p className="text-sm text-brand-muted mt-2">
             <span className="text-white font-medium">
@@ -176,12 +329,21 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-white/5">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-muted">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-sm text-brand-muted text-center mb-6 max-w-2xl mx-auto">
+            Built on principles developed through enterprise-grade AI routing
+            research and governance system design. Designed and tested across
+            multi-model enterprise environments.
+          </p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-muted">
           <p>
-            &copy; 2026 Contruil LLC. U.S. Provisional Patent Application No.
-            63/980,310 (Patent Pending).
+            &copy; 2026 Contruil LLC. U.S. Patent Pending — Application No.
+            63/980,310.
           </p>
           <div className="flex gap-6">
+            <a href="/workplace-policy" className="hover:text-white transition-colors">
+              Workplace Policy
+            </a>
             <a href="https://cyw-os.com" className="hover:text-white transition-colors">
               CYW OS
             </a>
@@ -191,6 +353,7 @@ export default function Home() {
             >
               Contact
             </a>
+          </div>
           </div>
         </div>
       </footer>

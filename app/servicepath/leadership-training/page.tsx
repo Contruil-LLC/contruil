@@ -29,6 +29,12 @@ export default function LeadershipTraining() {
               Leadership Training
             </a>
             <a
+              href="/servicepath/leadership-training/trainer"
+              className="hover:text-white transition-colors"
+            >
+              Practice
+            </a>
+            <a
               href="/servicepath/compliance-architecture"
               className="hover:text-white transition-colors"
             >
@@ -65,6 +71,12 @@ export default function LeadershipTraining() {
             <span className="px-3 py-1.5 rounded border border-white/10 text-brand-muted">
               50 NSLS + LinkedIn pilot
             </span>
+            <a
+              href="/servicepath/leadership-training/trainer"
+              className="px-4 py-2 bg-brand-accent text-white rounded-md hover:bg-blue-600 transition-colors"
+            >
+              Try the trainer
+            </a>
           </div>
         </div>
       </section>
