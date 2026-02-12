@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Shared Responsibility Model</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 16px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0 0 8px 0;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      color: #64748b;
+      font-size: 1rem;
+      margin: 0 0 24px 0;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #e2e8f0;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .control-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    select, input {
+      padding: 10px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: all 0.2s;
+      background: white;
+    }
+    select:hover, input:hover {
+      border-color: #cbd5e1;
+    }
+    select:focus, input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+      align-items: flex-end;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: #667eea;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #5568d3;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+    .matrix-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+    .legend-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+    .provider-color {
+      background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    }
+    .customer-color {
+      background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    }
+    .shared-color {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      background: #1e293b;
+      color: white;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-align: left;
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    th:first-child {
+      width: 25%;
+    }
+    td {
+      padding: 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .category-row {
+      background: #f8fafc;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .category-row:hover {
+      background: #f1f5f9;
+    }
+    .category-cell {
+      padding: 18px 20px;
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .expand-icon {
+      transition: transform 0.3s;
+      font-size: 1.2rem;
+      color: #64748b;
+    }
+    .expand-icon.expanded {
+      transform: rotate(90deg);
+    }
+    .category-icon {
+      font-size: 1.5rem;
+    }
+    .detail-row {
+      display: none;
+    }
+    .detail-row.visible {
+      display: table-row;
+    }
+    .detail-cell {
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      position: relative;
+    }
+    .responsibility-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .provider-badge {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    .customer-badge {
+      background: #ccfbf1;
+      color: #0d9488;
+    }
+    .shared-badge {
+      background: #fed7aa;
+      color: #d97706;
+    }
+    .detail-content {
+      margin-top: 8px;
+    }
+    .detail-list {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+    .detail-list li {
+      margin: 4px 0;
+      color: #475569;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+      margin-left: 4px;
+    }
+    .tooltip-icon {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    .tooltip-text {
+      visibility: hidden;
+      width: 280px;
+      background-color: #1e293b;
+      color: white;
+      text-align: left;
+      border-radius: 8px;
+      padding: 12px;
+      position: absolute;
+      z-index: 100;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -140px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .tooltip-text::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #1e293b transparent transparent transparent;
+    }
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+    .progress-container {
+      margin-top: 8px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      overflow: hidden;
+      height: 8px;
+    }
+    .progress-bar {
+      height: 100%;
+      transition: width 0.3s;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+    .framework-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 8px;
+      background: #f1f5f9;
+      color: #475569;
+    }
+    .no-results {
+      text-align: center;
+      padding: 48px;
+      color: #64748b;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+      .btn-group {
+        margin-left: 0;
+        width: 100%;
+      }
+      button {
+        flex: 1;
+      }
+      th, td {
+        padding: 12px 16px;
+      }
+      .tooltip-text {
+        width: 200px;
+        margin-left: -100px;
+      }
+    }
+    .how-to-panel {
+      margin-bottom: 24px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .how-to-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #f8fafc;
+      cursor: pointer;
+      font-weight: 600;
+      color: #475569;
+      user-select: none;
+    }
+    .how-to-header:hover { background: #f1f5f9; }
+    .how-to-header .chevron { transition: transform 0.2s; }
+    .how-to-panel.collapsed .how-to-header .chevron { transform: rotate(-90deg); }
+    .how-to-body {
+      padding: 16px 20px;
+      background: white;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #475569;
+    }
+    .how-to-body.collapsed { display: none; }
+    .how-to-body ul { margin: 8px 0; padding-left: 24px; }
+    .how-to-body li { margin: 4px 0; }
+    .how-to-body strong { color: #1e293b; }
+    .share-link-btn {
+      margin-top: 12px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #475569;
+    }
+    .share-link-btn:hover { background: #e2e8f0; }
+    .dark-mode-toggle {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid #e2e8f0;
+      background: white;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    body.dark-mode {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    }
+    body.dark-mode .header,
+    body.dark-mode .matrix-container { background: #1e293b; }
+    body.dark-mode .header { box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+    body.dark-mode h1 { color: #f1f5f9; }
+    body.dark-mode .subtitle { color: #94a3b8; }
+    body.dark-mode .controls { border-color: #334155; }
+    body.dark-mode .control-group label { color: #94a3b8; }
+    body.dark-mode select,
+    body.dark-mode input {
+      background: #334155;
+      border-color: #475569;
+      color: #f1f5f9;
+    }
+    body.dark-mode .btn-secondary { background: #334155; color: #e2e8f0; }
+    body.dark-mode .btn-secondary:hover { background: #475569; }
+    body.dark-mode .legend { background: #0f172a; border-color: #334155; }
+    body.dark-mode .legend-item span { color: #e2e8f0; }
+    body.dark-mode th { background: #0f172a; }
+    body.dark-mode .category-row { background: #334155; }
+    body.dark-mode .category-row:hover { background: #475569; }
+    body.dark-mode .category-cell { color: #f1f5f9; }
+    body.dark-mode td { border-color: #334155; }
+    body.dark-mode .detail-cell { color: #cbd5e1; }
+    body.dark-mode .how-to-panel { border-color: #475569; }
+    body.dark-mode .how-to-header { background: #334155; color: #cbd5e1; }
+    body.dark-mode .how-to-body { background: #1e293b; color: #cbd5e1; }
+    body.dark-mode .how-to-body strong { color: #f1f5f9; }
+    body.dark-mode .dark-mode-toggle {
+      background: #334155;
+      border-color: #475569;
+      color: #e2e8f0;
+    }
+    body.dark-mode .no-results { color: #94a3b8; }
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .controls, .btn-group, .how-to-panel, .dark-mode-toggle {
+        display: none !important;
+      }
+      .detail-row {
+        display: table-row !important;
+      }
+      .expand-icon {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
+        <div>
+          <h1>🛡️ Interactive Shared Responsibility Model</h1>
+          <p class="subtitle">Comprehensive compliance and security responsibility matrix for cloud services</p>
+        </div>
+        <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle dark mode">
+          <span id="darkModeIcon">🌙</span>
+          <span id="darkModeLabel">Dark</span>
+        </button>
+      </div>
+
+      <div class="how-to-panel collapsed" id="howToPanel">
+        <div class="how-to-header" id="howToHeader">
+          <span>📖 How to use this tool</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="how-to-body collapsed" id="howToBody">
+          <p><strong>Filters:</strong> Use <strong>Service Model</strong> (IaaS, PaaS, SaaS) to see responsibility differences by deployment type. Use <strong>Compliance Framework</strong> to surface HIPAA, GDPR, SOC 2, or ISO 27001–specific requirements.</p>
+          <p><strong>Progress bars:</strong> Show the provider’s share of responsibility — higher bar = more provider responsibility (less for you to manage).</p>
+          <p><strong>Expand / collapse:</strong> Click any category row to reveal details. Use Expand All / Collapse All for quick navigation.</p>
+          <p><strong>Export & print:</strong> Export PDF expands all sections and opens print dialog. Use your browser’s “Save as PDF” option.</p>
+          <p><strong>Shareable links:</strong> Your current filters are reflected in the URL. Copy the link to share a specific view (e.g. HIPAA + SaaS).</p>
+          <button class="share-link-btn" id="copyLinkBtn">📋 Copy link with current filters</button>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <div class="control-group">
+          <label>Service Model</label>
+          <select id="serviceModel">
+            <option value="all">All Models</option>
+            <option value="iaas">IaaS (Infrastructure)</option>
+            <option value="paas">PaaS (Platform)</option>
+            <option value="saas">SaaS (Software)</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>Compliance Framework</label>
+          <select id="framework">
+            <option value="general">General</option>
+            <option value="hipaa">HIPAA</option>
+            <option value="gdpr">GDPR</option>
+            <option value="soc2">SOC 2</option>
+            <option value="iso27001">ISO 27001</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>Search</label>
+          <input type="text" id="searchInput" placeholder="Filter categories...">
+        </div>
+        
+        <div class="btn-group">
+          <button class="btn-secondary" onclick="expandAll()">
+            <span>📂</span> Expand All
+          </button>
+          <button class="btn-secondary" onclick="collapseAll()">
+            <span>📁</span> Collapse All
+          </button>
+          <button class="btn-primary" onclick="exportToPDF()">
+            <span>📄</span> Export PDF
+          </button>
+          <button class="btn-primary" onclick="printTable()">
+            <span>🖨️</span> Print
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-container">
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-box provider-color"></div>
+          <span><strong>Provider Responsibility</strong></span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box customer-color"></div>
+          <span><strong>Customer Responsibility</strong></span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box shared-color"></div>
+          <span><strong>Shared Responsibility</strong></span>
+        </div>
+      </div>
+
+      <table id="responsibilityTable">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Cloud Provider</th>
+            <th>Customer</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Content will be generated by JavaScript -->
+        </tbody>
+      </table>
+      
+      <div id="noResults" class="no-results" style="display: none;">
+        No categories match your current filters. Try adjusting your search or filters.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const responsibilityData = {
+      'physical-security': {
+        name: 'Physical Security',
+        icon: '🏢',
+        iaas: {
+          provider: 'Complete responsibility for data center security, physical access controls, environmental controls (HVAC, power), and hardware security',
+          customer: 'No direct responsibility',
+          progress: 100
+        },
+        paas: {
+          provider: 'Complete responsibility for data center security, physical access controls, environmental controls (HVAC, power), and hardware security',
+          customer: 'No direct responsibility',
+          progress: 100
+        },
+        saas: {
+          provider: 'Complete responsibility for data center security, physical access controls, environmental controls (HVAC, power), and hardware security',
+          customer: 'No direct responsibility',
+          progress: 100
+        },
+        frameworks: {
+          hipaa: 'Provider must maintain physical safeguards per HIPAA Security Rule',
+          gdpr: 'Provider must ensure physical security as part of technical measures under Article 32',
+          soc2: 'Provider must demonstrate physical security controls in SOC 2 Type II audit',
+          iso27001: 'Provider must implement controls from Annex A.11 (Physical Security)'
+        },
+        tooltip: 'Physical security includes building access, surveillance, environmental monitoring, and hardware protection'
+      },
+      'infrastructure-security': {
+        name: 'Infrastructure Security',
+        icon: '🔧',
+        iaas: {
+          provider: 'Hypervisor security, network infrastructure, storage systems, compute resources, and underlying virtualization layer',
+          customer: 'Virtual network configuration, security groups, firewall rules, OS hardening, patch management',
+          progress: 50
+        },
+        paas: {
+          provider: 'Complete infrastructure including OS, middleware, runtime environments, web servers, and managed services',
+          customer: 'Application configuration, security settings within the platform, and API security',
+          progress: 75
+        },
+        saas: {
+          provider: 'End-to-end infrastructure management including all underlying systems and platforms',
+          customer: 'Application usage policies and configuration within provided settings',
+          progress: 95
+        },
+        frameworks: {
+          hipaa: 'Both parties must maintain technical safeguards; customer responsible for BAA compliance',
+          gdpr: 'Provider ensures infrastructure security; customer configures secure processing environments',
+          soc2: 'Provider demonstrates infrastructure controls; customer implements proper configurations',
+          iso27001: 'Shared controls from Annex A.9 (Access Control) and A.13 (Network Security)'
+        },
+        tooltip: 'Infrastructure security covers the foundational compute, storage, and networking components'
+      },
+      'data-protection': {
+        name: 'Data Protection & Encryption',
+        icon: '🔒',
+        iaas: {
+          provider: 'Encryption tools, key management services (KMS), hardware security modules (HSMs)',
+          customer: 'Enable encryption at rest and in transit, manage encryption keys, implement data classification',
+          progress: 40
+        },
+        paas: {
+          provider: 'Built-in encryption mechanisms, managed key services, automated encryption for platform services',
+          customer: 'Enable encryption features, configure data retention policies, implement backup strategies',
+          progress: 60
+        },
+        saas: {
+          provider: 'Default encryption at rest and in transit, automated key rotation, data loss prevention',
+          customer: 'Configure encryption settings if available, define data handling policies',
+          progress: 85
+        },
+        frameworks: {
+          hipaa: 'Encryption required for ePHI at rest and in transit; customer must manage encryption keys',
+          gdpr: 'Encryption as technical measure under Article 32; pseudonymization where appropriate',
+          soc2: 'Encryption controls for confidential data; key management procedures documented',
+          iso27001: 'Cryptographic controls from Annex A.10 (Cryptography)'
+        },
+        tooltip: 'Data protection includes encryption, tokenization, key management, and data loss prevention'
+      },
+      'access-control': {
+        name: 'Identity & Access Management',
+        icon: '👤',
+        iaas: {
+          provider: 'IAM framework, authentication services, MFA infrastructure, directory services',
+          customer: 'User provisioning, role-based access control (RBAC), least privilege policies, credential management, MFA enforcement',
+          progress: 30
+        },
+        paas: {
+          provider: 'IAM services, SSO integration, OAuth/OIDC support, service authentication',
+          customer: 'Application-level access controls, user role management, API authentication, token management',
+          progress: 45
+        },
+        saas: {
+          provider: 'Complete user authentication system, SSO, automated provisioning, session management',
+          customer: 'User account management, role assignments, access reviews, offboarding processes',
+          progress: 70
+        },
+        frameworks: {
+          hipaa: 'Unique user identification, automatic logoff, encryption of passwords required',
+          gdpr: 'Access controls essential for data protection by design and default (Article 25)',
+          soc2: 'Logical access controls critical for SOC 2 CC6 criteria',
+          iso27001: 'Access control requirements in Annex A.9 (Access Control)'
+        },
+        tooltip: 'IAM encompasses authentication, authorization, user management, and privilege management'
+      },
+      'application-security': {
+        name: 'Application Security',
+        icon: '💻',
+        iaas: {
+          provider: 'Security testing tools, vulnerability scanning services, WAF offerings',
+          customer: 'Complete application security: secure coding, vulnerability management, security testing, dependency management, container security',
+          progress: 20
+        },
+        paas: {
+          provider: 'Platform security patches, managed runtimes, WAF, API gateway security',
+          customer: 'Application code security, secure API design, input validation, output encoding, session management',
+          progress: 40
+        },
+        saas: {
+          provider: 'Complete application security including code security, vulnerability patches, penetration testing',
+          customer: 'Secure application usage, configuration of security features, reporting vulnerabilities',
+          progress: 90
+        },
+        frameworks: {
+          hipaa: 'Applications processing ePHI must implement integrity controls and audit logging',
+          gdpr: 'Security of processing under Article 32; vulnerability management required',
+          soc2: 'System operations controls CC7; change management procedures',
+          iso27001: 'Application security controls from Annex A.14 (System Development)'
+        },
+        tooltip: 'Application security covers code security, vulnerability management, and secure development practices'
+      },
+      'compliance-audits': {
+        name: 'Compliance & Auditing',
+        icon: '📋',
+        iaas: {
+          provider: 'Infrastructure certifications (SOC 2, ISO 27001, FedRAMP), audit reports, compliance documentation',
+          customer: 'Application-level compliance, evidence collection, compliance configuration, workload-specific certifications',
+          progress: 60
+        },
+        paas: {
+          provider: 'Platform certifications, inherited compliance controls, compliance attestations',
+          customer: 'Application compliance requirements, data handling compliance, audit participation',
+          progress: 70
+        },
+        saas: {
+          provider: 'Complete compliance program including certifications, audits, and regulatory adherence',
+          customer: 'Review compliance reports, configure compliant usage, maintain usage records',
+          progress: 85
+        },
+        frameworks: {
+          hipaa: 'Provider must be HIPAA compliant; customer must sign BAA and configure HIPAA-compliant workloads',
+          gdpr: 'Provider must process per Article 28; customer is data controller with primary responsibility',
+          soc2: 'Provider obtains SOC 2 Type II; customer relies on report for own audits',
+          iso27001: 'Provider certification provides assurance; customer must maintain own ISMS'
+        },
+        tooltip: 'Compliance includes regulatory requirements, audit preparation, and certification maintenance'
+      },
+      'monitoring-logging': {
+        name: 'Monitoring & Logging',
+        icon: '📊',
+        iaas: {
+          provider: 'Infrastructure monitoring tools, log aggregation services, alerting platforms',
+          customer: 'Configure monitoring, define alerts, analyze logs, incident response, SIEM integration, log retention',
+          progress: 35
+        },
+        paas: {
+          provider: 'Platform monitoring, application performance monitoring, automated alerting for platform issues',
+          customer: 'Application-level monitoring, custom metrics, log analysis, performance optimization',
+          progress: 55
+        },
+        saas: {
+          provider: 'Complete monitoring infrastructure, availability monitoring, performance metrics, security alerts',
+          customer: 'Review security logs, configure usage alerts, monitor user activity',
+          progress: 80
+        },
+        frameworks: {
+          hipaa: 'Audit controls required for ePHI access; logs must be retained per requirements',
+          gdpr: 'Logging necessary for demonstrating compliance with Article 5(2) accountability',
+          soc2: 'Monitoring and logging controls critical for CC7 (System Operations)',
+          iso27001: 'Logging requirements in Annex A.12.4 (Logging and Monitoring)'
+        },
+        tooltip: 'Monitoring and logging provide visibility into system health, security events, and compliance'
+      },
+      'network-security': {
+        name: 'Network Security',
+        icon: '🌐',
+        iaas: {
+          provider: 'Physical network infrastructure, DDoS protection, network isolation capabilities',
+          customer: 'Virtual network design, subnet configuration, network ACLs, VPN setup, traffic filtering, microsegmentation',
+          progress: 45
+        },
+        paas: {
+          provider: 'Network infrastructure, managed load balancers, DDoS protection, CDN',
+          customer: 'Network policies, API gateway configuration, traffic routing, TLS/SSL configuration',
+          progress: 65
+        },
+        saas: {
+          provider: 'Complete network security including firewalls, DDoS protection, network isolation',
+          customer: 'IP whitelisting if available, VPN configuration for hybrid scenarios',
+          progress: 90
+        },
+        frameworks: {
+          hipaa: 'Transmission security required for ePHI; integrity controls for network communications',
+          gdpr: 'Network security part of technical measures under Article 32',
+          soc2: 'Network security controls part of CC6 (Logical Access)',
+          iso27001: 'Network security controls from Annex A.13 (Communications Security)'
+        },
+        tooltip: 'Network security includes firewalls, segmentation, DDoS protection, and traffic encryption'
+      },
+      'incident-response': {
+        name: 'Incident Response',
+        icon: '🚨',
+        iaas: {
+          provider: 'Infrastructure incident response, notification of infrastructure issues, security incident communication',
+          customer: 'Application incident response plan, security operations center (SOC), incident handling procedures, forensics, breach notification',
+          progress: 30
+        },
+        paas: {
+          provider: 'Platform incident response, automated remediation for platform issues, security notifications',
+          customer: 'Application incident response, investigation of security events, coordination with provider',
+          progress: 50
+        },
+        saas: {
+          provider: 'Complete incident response program, 24/7 security monitoring, automated incident handling',
+          customer: 'Report security concerns, participate in investigations, follow incident communications',
+          progress: 85
+        },
+        frameworks: {
+          hipaa: 'Breach notification required within 60 days; incident response plan mandatory',
+          gdpr: 'Breach notification within 72 hours to supervisory authority (Article 33)',
+          soc2: 'Incident response procedures critical for risk management',
+          iso27001: 'Incident management requirements in Annex A.16 (Incident Management)'
+        },
+        tooltip: 'Incident response covers detection, containment, investigation, and recovery from security events'
+      },
+      'disaster-recovery': {
+        name: 'Business Continuity & DR',
+        icon: '🔄',
+        iaas: {
+          provider: 'Multi-region infrastructure, backup services, snapshot capabilities, availability zones',
+          customer: 'Backup strategy, disaster recovery plan, RPO/RTO definition, cross-region replication, testing DR procedures',
+          progress: 40
+        },
+        paas: {
+          provider: 'Platform-level redundancy, automated backups, geo-replication for managed services',
+          customer: 'Application backup configuration, DR testing, failover procedures, data recovery',
+          progress: 60
+        },
+        saas: {
+          provider: 'Complete business continuity program, automated backups, high availability architecture',
+          customer: 'Understand provider SLAs, maintain secondary vendor if required, export critical data',
+          progress: 85
+        },
+        frameworks: {
+          hipaa: 'Contingency plan required including data backup, disaster recovery, and emergency mode operations',
+          gdpr: 'Ability to restore availability per Article 32; business continuity planning',
+          soc2: 'Availability criteria (A1) requires comprehensive BC/DR program',
+          iso27001: 'Business continuity requirements in Annex A.17 (Business Continuity)'
+        },
+        tooltip: 'Business continuity ensures systems can recover from disasters and maintain operations'
+      },
+      'vulnerability-management': {
+        name: 'Vulnerability Management',
+        icon: '🔍',
+        iaas: {
+          provider: 'Infrastructure vulnerability scanning, hypervisor patching, hardware firmware updates',
+          customer: 'OS patching, application vulnerability scanning, penetration testing, security assessments, third-party library updates',
+          progress: 35
+        },
+        paas: {
+          provider: 'Platform patching, managed service updates, vulnerability scanning for platform components',
+          customer: 'Application dependency management, code vulnerability scanning, API security testing',
+          progress: 60
+        },
+        saas: {
+          provider: 'Complete vulnerability management program, regular security assessments, automated patching',
+          customer: 'Report discovered vulnerabilities, review security advisories, update integrations',
+          progress: 90
+        },
+        frameworks: {
+          hipaa: 'Regular security assessments required; vulnerability remediation part of risk management',
+          gdpr: 'Regular testing and evaluation of security measures (Article 32)',
+          soc2: 'Vulnerability management part of CC7 (System Operations)',
+          iso27001: 'Vulnerability management in Annex A.12.6 and A.18.2'
+        },
+        tooltip: 'Vulnerability management identifies, assesses, and remediates security weaknesses'
+      }
+    };
+
+    let currentServiceModel = 'all';
+    let currentFramework = 'general';
+    let currentSearch = '';
+    let expandedCategories = new Set();
+
+    function readUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const model = params.get('model');
+      const framework = params.get('framework');
+      const expand = params.get('expand');
+      if (['all','iaas','paas','saas'].includes(model)) currentServiceModel = model;
+      if (['general','hipaa','gdpr','soc2','iso27001'].includes(framework)) currentFramework = framework;
+      if (expand === 'all') expandedCategories = new Set(Object.keys(responsibilityData));
+      else if (expand === 'none') expandedCategories.clear();
+    }
+
+    function updateUrl() {
+      const params = new URLSearchParams();
+      if (currentServiceModel !== 'all') params.set('model', currentServiceModel);
+      if (currentFramework !== 'general') params.set('framework', currentFramework);
+      if (expandedCategories.size === Object.keys(responsibilityData).length) params.set('expand', 'all');
+      else if (expandedCategories.size === 0) params.set('expand', 'none');
+      const qs = params.toString();
+      const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+      window.history.replaceState({}, '', url);
+    }
+
+    function syncFromUrl() {
+      readUrlParams();
+      document.getElementById('serviceModel').value = currentServiceModel;
+      document.getElementById('framework').value = currentFramework;
+      document.getElementById('searchInput').value = currentSearch;
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      const noResults = document.getElementById('noResults');
+      tbody.innerHTML = '';
+      let hasResults = false;
+
+      Object.entries(responsibilityData).forEach(([id, category]) => {
+        if (currentSearch && !category.name.toLowerCase().includes(currentSearch.toLowerCase())) {
+          return;
+        }
+
+        hasResults = true;
+        const isExpanded = expandedCategories.has(id);
+        
+        // Category row
+        const categoryRow = document.createElement('tr');
+        categoryRow.className = 'category-row';
+        categoryRow.onclick = () => toggleCategory(id);
+        categoryRow.innerHTML = `
+          <td colspan="3">
+            <div class="category-cell">
+              <span class="expand-icon ${isExpanded ? 'expanded' : ''}">▶</span>
+              <span class="category-icon">${category.icon}</span>
+              <span>${category.name}</span>
+              ${category.tooltip ? `
+                <span class="tooltip" onclick="event.stopPropagation()">
+                  <span class="tooltip-icon">ℹ️</span>
+                  <span class="tooltip-text">${category.tooltip}</span>
+                </span>
+              ` : ''}
+            </div>
+          </td>
+        `;
+        tbody.appendChild(categoryRow);
+
+        // Detail rows for each service model
+        const models = currentServiceModel === 'all' ? ['iaas', 'paas', 'saas'] : [currentServiceModel];
+        
+        models.forEach(model => {
+          const detailRow = document.createElement('tr');
+          detailRow.className = `detail-row ${isExpanded ? 'visible' : ''}`;
+          detailRow.dataset.category = id;
+          
+          const modelData = category[model];
+          const frameworkInfo = currentFramework !== 'general' ? category.frameworks[currentFramework] : null;
+          
+          detailRow.innerHTML = `
+            <td class="detail-cell">
+              <div class="responsibility-badge shared-badge">${model.toUpperCase()}</div>
+              ${frameworkInfo ? `<div class="framework-badge">${currentFramework.toUpperCase()}</div>` : ''}
+              ${frameworkInfo ? `<div class="detail-content" style="margin-top: 12px; font-size: 0.85rem; color: #475569;">${frameworkInfo}</div>` : ''}
+            </td>
+            <td class="detail-cell">
+              <div class="responsibility-badge provider-badge">Provider</div>
+              <div class="detail-content">${modelData.provider}</div>
+            </td>
+            <td class="detail-cell">
+              <div class="responsibility-badge customer-badge">Customer</div>
+              <div class="detail-content">${modelData.customer}</div>
+              <div class="progress-container">
+                <div class="progress-bar" style="width: ${100 - modelData.progress}%"></div>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(detailRow);
+        });
+      });
+
+      noResults.style.display = hasResults ? 'none' : 'block';
+      document.getElementById('responsibilityTable').style.display = hasResults ? 'table' : 'none';
+      updateUrl();
+    }
+
+    function toggleCategory(id) {
+      if (expandedCategories.has(id)) {
+        expandedCategories.delete(id);
+      } else {
+        expandedCategories.add(id);
+      }
+      renderTable();
+    }
+
+    function expandAll() {
+      expandedCategories = new Set(Object.keys(responsibilityData));
+      renderTable();
+    }
+
+    function collapseAll() {
+      expandedCategories.clear();
+      renderTable();
+    }
+
+    function exportToPDF() {
+      expandAll();
+      setTimeout(() => {
+        window.print();
+      }, 300);
+    }
+
+    function printTable() {
+      window.print();
+    }
+
+    // Event listeners
+    document.getElementById('serviceModel').addEventListener('change', (e) => {
+      currentServiceModel = e.target.value;
+      renderTable();
+    });
+
+    document.getElementById('framework').addEventListener('change', (e) => {
+      currentFramework = e.target.value;
+      renderTable();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      renderTable();
+    });
+
+    // How to use panel
+    document.getElementById('howToHeader').addEventListener('click', () => {
+      const panel = document.getElementById('howToPanel');
+      const body = document.getElementById('howToBody');
+      panel.classList.toggle('collapsed');
+      body.classList.toggle('collapsed');
+    });
+
+    document.getElementById('copyLinkBtn').addEventListener('click', () => {
+      updateUrl();
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        const btn = document.getElementById('copyLinkBtn');
+        btn.textContent = '✓ Copied!';
+        setTimeout(() => { btn.textContent = '📋 Copy link with current filters'; }, 2000);
+      });
+    });
+
+    // Dark mode
+    function initDarkMode() {
+      const stored = localStorage.getItem('srm-dark-mode');
+      const prefers = stored !== null ? stored === 'true' : false;
+      document.body.classList.toggle('dark-mode', prefers);
+      document.getElementById('darkModeIcon').textContent = prefers ? '☀️' : '🌙';
+      document.getElementById('darkModeLabel').textContent = prefers ? 'Light' : 'Dark';
+    }
+
+    document.getElementById('darkModeToggle').addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark-mode');
+      localStorage.setItem('srm-dark-mode', isDark);
+      document.getElementById('darkModeIcon').textContent = isDark ? '☀️' : '🌙';
+      document.getElementById('darkModeLabel').textContent = isDark ? 'Light' : 'Dark';
+    });
+
+    // Initial load: read URL params, apply dark mode preference, render
+    syncFromUrl();
+    initDarkMode();
+    renderTable();
+  </script>
+</body>
+</html>
