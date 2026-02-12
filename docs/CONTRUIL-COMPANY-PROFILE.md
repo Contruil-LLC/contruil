@@ -113,6 +113,7 @@ https://contruil.com/workplace-policy
 | Page | URL |
 |------|-----|
 | Homepage | https://contruil.com |
+| About | https://contruil.com/about |
 | Pilot Fit Call | https://contruil.com/pilot-fit-call |
 | AI Governance Readiness Checklist | https://contruil.com/checklist |
 | Workplace Policy | https://contruil.com/workplace-policy |

@@ -6,6 +6,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <span className="text-xl font-semibold tracking-tight">Contruil</span>
           <div className="hidden md:flex items-center gap-8 text-sm text-brand-muted">
+            <a href="/about" className="hover:text-white transition-colors">
+              About
+            </a>
             <a href="#what-we-do" className="hover:text-white transition-colors">
               What We Do
             </a>
@@ -341,6 +344,9 @@ export default function Home() {
             63/980,310.
           </p>
           <div className="flex gap-6">
+            <a href="/about" className="hover:text-white transition-colors">
+              About
+            </a>
             <a href="/workplace-policy" className="hover:text-white transition-colors">
               Workplace Policy
             </a>
