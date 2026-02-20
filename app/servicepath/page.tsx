@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ServicePath — Contruil",
+  title: "ServicePath — Contruil™",
   description:
     "AI-powered skill development and compliance infrastructure. Four-Gate validation, tamper-evident audit trails. Education, Leadership Training, Compliance.",
 };
@@ -13,7 +13,7 @@ export default function ServicePath() {
       <nav className="fixed top-0 w-full z-50 bg-brand-dark/90 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="/" className="text-xl font-semibold tracking-tight">
-            Contruil
+            Contruil™
           </a>
           <div className="hidden md:flex items-center gap-8 text-sm text-brand-muted">
             <a href="/#what-we-do" className="hover:text-white transition-colors">
@@ -248,13 +248,22 @@ export default function ServicePath() {
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-muted">
-          <p>
-            &copy; 2026 Contruil LLC. U.S. Provisional Patent Application No.
-            63/980,310 (Patent Pending).
-          </p>
+          <div>
+            <p className="mb-2">
+              CONTRUIL™ is a trademark of Contruil LLC. U.S. trademark
+              application pending (Serial No. 99660773).
+            </p>
+            <p>
+              &copy; 2026 Contruil LLC. U.S. Provisional Patent Application No.
+              63/980,310 (Patent Pending).
+            </p>
+          </div>
           <div className="flex gap-6">
             <a href="/" className="hover:text-white transition-colors">
               Home
+            </a>
+            <a href="/shared-responsibility-matrix.html" className="hover:text-white transition-colors">
+              Cloud Responsibility Matrix
             </a>
             <a href="https://cyw-os.com" className="hover:text-white transition-colors">
               CYW OS

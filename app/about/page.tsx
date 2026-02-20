@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "About — Contruil",
+  title: "About — Contruil™",
   description:
     "Contruil LLC builds supervisory AI control infrastructure for API-driven financial platforms. Policy-based classification, human-gated validation, tamper-evident control logs. U.S. Patent Pending.",
 };
@@ -12,7 +12,7 @@ export default function AboutPage() {
       <nav className="fixed top-0 w-full z-50 bg-brand-dark/90 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-semibold tracking-tight">
-            Contruil
+            Contruil™
           </Link>
           <div className="flex gap-6">
             <Link
@@ -195,6 +195,10 @@ export default function AboutPage() {
         </section>
 
         <p className="mt-12 text-xs text-brand-muted">
+          CONTRUIL™ is a trademark of Contruil LLC. U.S. trademark application
+          pending (Serial No. 99660773).
+        </p>
+        <p className="mt-2 text-xs text-brand-muted">
           © {new Date().getFullYear()} Contruil LLC. U.S. Patent Pending —
           Application No. 63/980,310.
         </p>

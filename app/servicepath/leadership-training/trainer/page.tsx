@@ -115,7 +115,7 @@ export default function NegotiationTrainer() {
       <nav className="fixed top-0 w-full z-50 bg-brand-dark/90 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="/" className="text-xl font-semibold tracking-tight">
-            Contruil
+            Contruil™
           </a>
           <div className="hidden md:flex items-center gap-8 text-sm text-brand-muted">
             <a href="/servicepath" className="hover:text-white transition-colors">
@@ -300,6 +300,10 @@ export default function NegotiationTrainer() {
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-white/5 mt-12">
         <div className="max-w-6xl mx-auto text-center text-sm text-brand-muted">
+          <p className="mb-2">
+            CONTRUIL™ is a trademark of Contruil LLC. U.S. trademark
+            application pending (Serial No. 99660773).
+          </p>
           <p>
             Part of ServicePath Leadership Training. Built by Contruil LLC. Patent
             Pending (U.S. 63/980,310).

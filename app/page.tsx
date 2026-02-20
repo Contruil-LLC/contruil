@@ -4,7 +4,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-brand-dark/90 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <span className="text-xl font-semibold tracking-tight">Contruil</span>
+          <span className="text-xl font-semibold tracking-tight">Contruil™</span>
           <div className="hidden md:flex items-center gap-8 text-sm text-brand-muted">
             <a href="/about" className="hover:text-white transition-colors">
               About
@@ -85,6 +85,17 @@ export default function Home() {
                 </a>
                 <p className="text-xs text-brand-muted mt-1">
                   Pre-pilot self-assessment
+                </p>
+              </div>
+              <div>
+                <a
+                  href="/shared-responsibility-matrix.html"
+                  className="inline-block px-6 py-3 border border-white/20 text-brand-muted font-medium rounded-md hover:bg-white/5 hover:text-white transition-colors text-center"
+                >
+                  Cloud Responsibility Matrix
+                </a>
+                <p className="text-xs text-brand-muted mt-1">
+                  IaaS/PaaS/SaaS + HIPAA, GDPR, SOC 2
                 </p>
               </div>
             </div>
@@ -339,16 +350,25 @@ export default function Home() {
             multi-model enterprise environments.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-muted">
-          <p>
-            &copy; 2026 Contruil LLC. U.S. Patent Pending — Application No.
-            63/980,310.
-          </p>
+          <div>
+            <p className="mb-2">
+              CONTRUIL™ is a trademark of Contruil LLC. U.S. trademark
+              application pending (Serial No. 99660773).
+            </p>
+            <p>
+              &copy; 2026 Contruil LLC. U.S. Patent Pending — Application No.
+              63/980,310.
+            </p>
+          </div>
           <div className="flex gap-6">
             <a href="/about" className="hover:text-white transition-colors">
               About
             </a>
             <a href="/workplace-policy" className="hover:text-white transition-colors">
               Workplace Policy
+            </a>
+            <a href="/shared-responsibility-matrix.html" className="hover:text-white transition-colors">
+              Cloud Responsibility Matrix
             </a>
             <a href="https://cyw-os.com" className="hover:text-white transition-colors">
               CYW OS

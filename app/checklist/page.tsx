@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PrintButton } from "@/components/PrintButton";
 
 export const metadata = {
-  title: "AI Governance Readiness Checklist — Contruil",
+  title: "AI Governance Readiness Checklist — Contruil™",
   description:
     "Assess pilot eligibility. Multi-model visibility, routing controls, human checkpoints, audit trail integrity, cost management, incident detection.",
 };
@@ -58,7 +58,7 @@ export default function ChecklistPage() {
       <nav className="fixed top-0 w-full z-50 bg-brand-dark/90 backdrop-blur-sm border-b border-white/5 print:hidden">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-semibold tracking-tight">
-            Contruil
+            Contruil™
           </Link>
           <div className="flex items-center gap-6">
             <Link
@@ -134,6 +134,10 @@ export default function ChecklistPage() {
         </div>
 
         <p className="mt-8 text-xs text-brand-muted">
+          CONTRUIL™ is a trademark of Contruil LLC. U.S. trademark application
+          pending (Serial No. 99660773).
+        </p>
+        <p className="mt-2 text-xs text-brand-muted">
           © {new Date().getFullYear()} Contruil LLC. U.S. Patent Pending —
           Application No. 63/980,310.
         </p>

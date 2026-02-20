@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Workplace Policy — Contruil",
+  title: "Workplace Policy — Contruil™",
   description:
     "Contruil workplace policy. Remote-first, control-driven. Least-privilege access, change-managed approvals, auditability.",
 };
@@ -12,7 +12,7 @@ export default function WorkplacePolicyPage() {
       <nav className="fixed top-0 w-full z-50 bg-brand-dark/90 backdrop-blur-sm border-b border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-semibold tracking-tight">
-            Contruil
+            Contruil™
           </Link>
           <div className="flex gap-6">
             <Link
@@ -108,6 +108,10 @@ export default function WorkplacePolicyPage() {
         </section>
 
         <p className="mt-12 text-xs text-brand-muted">
+          CONTRUIL™ is a trademark of Contruil LLC. U.S. trademark application
+          pending (Serial No. 99660773).
+        </p>
+        <p className="mt-2 text-xs text-brand-muted">
           &copy; {new Date().getFullYear()} Contruil LLC. U.S. Patent Pending —
           Application No. 63/980,310.
         </p>
