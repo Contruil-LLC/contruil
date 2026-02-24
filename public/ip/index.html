@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contruil LLC — Intellectual Property. Patent-pending multi-model AI orchestration architecture. CONTRUIL™ and CYW™ are registered trademarks of Contruil LLC.">
+<title>Contruil LLC — Intellectual Property</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #060810; color: #e2e8f0; min-height: 100vh; }
+
+  /* ── NAV ── */
+  nav { padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #0f1623; }
+  .nav-logo { font-size: 15px; font-weight: 800; letter-spacing: 0.12em; color: #fff; text-transform: uppercase; text-decoration: none; }
+  .nav-logo span { color: #3b82f6; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 12px; color: #64748b; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: #94a3b8; }
+
+  /* ── HERO ── */
+  .hero { text-align: center; padding: 80px 48px 60px; max-width: 800px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #3b82f6; margin-bottom: 20px; }
+  .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.15; color: #f8fafc; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .hero h1 em { font-style: normal; color: #3b82f6; }
+  .hero p { font-size: 16px; color: #94a3b8; line-height: 1.7; max-width: 580px; margin: 0 auto 36px; }
+  .hero-marks { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .mark-pill { background: #0f1623; border: 1px solid #1e3a5f; border-radius: 6px; padding: 8px 18px; font-size: 13px; font-weight: 700; color: #60a5fa; letter-spacing: 0.06em; }
+  .mark-pill span { color: #475569; font-weight: 400; font-size: 11px; display: block; margin-top: 2px; letter-spacing: 0.04em; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, #1e3a5f 30%, #1e3a5f 70%, transparent); margin: 0 48px; }
+
+  /* ── IP ASSERTIONS ── */
+  .assertions { max-width: 960px; margin: 60px auto; padding: 0 48px; }
+  .assertions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .assert-card { background: #0c1220; border: 1px solid #1a2845; border-radius: 12px; padding: 28px 24px; }
+  .assert-card .icon { font-size: 24px; margin-bottom: 16px; }
+  .assert-card h3 { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #60a5fa; margin-bottom: 10px; }
+  .assert-card p { font-size: 13px; color: #64748b; line-height: 1.7; }
+  .assert-card .reg { font-size: 12px; color: #334155; margin-top: 12px; font-family: 'Courier New', monospace; letter-spacing: 0.04em; }
+  .assert-card .reg strong { color: #475569; }
+
+  /* ── ARCHITECTURE STATEMENT ── */
+  .arch { background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 100%); border: 1px solid #1e3a5f; border-radius: 16px; max-width: 960px; margin: 0 auto 60px; padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .arch h2 { font-size: 26px; font-weight: 800; color: #f8fafc; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.01em; }
+  .arch h2 em { font-style: normal; color: #3b82f6; }
+  .arch p { font-size: 14px; color: #64748b; line-height: 1.8; margin-bottom: 16px; }
+  .arch-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .arch-badge { background: #0f1e35; border: 1px solid #1e3a5f; border-radius: 99px; padding: 4px 14px; font-size: 11px; color: #60a5fa; font-weight: 600; letter-spacing: 0.05em; }
+  .arch-right { display: flex; flex-direction: column; gap: 14px; }
+  .arch-stat { background: #071120; border: 1px solid #132036; border-radius: 8px; padding: 16px 20px; }
+  .arch-stat .label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #334155; margin-bottom: 6px; }
+  .arch-stat .value { font-size: 15px; font-weight: 700; color: #60a5fa; }
+  .arch-stat .sub { font-size: 11px; color: #334155; margin-top: 3px; }
+
+  /* ── FOUNDER STATEMENT ── */
+  .founder { max-width: 720px; margin: 0 auto 80px; padding: 0 48px; text-align: center; }
+  .founder blockquote { font-size: 17px; color: #94a3b8; line-height: 1.8; font-style: italic; margin-bottom: 20px; border-left: 3px solid #1e3a5f; text-align: left; padding-left: 24px; }
+  .founder cite { font-size: 12px; color: #475569; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── NOTICE BAR ── */
+  .notice { background: #060d1a; border-top: 1px solid #0f1d30; padding: 24px 48px; text-align: center; }
+  .notice p { font-size: 12px; color: #334155; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+  .notice strong { color: #475569; }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid #0f1623; padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  footer .copy { font-size: 11px; color: #1e293b; }
+  footer .marks { font-size: 11px; color: #1e293b; }
+
+  @media (max-width: 768px) {
+    .assertions-grid { grid-template-columns: 1fr; }
+    .arch { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+    nav { padding: 16px 24px; }
+    .hero, .assertions, .founder { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">Contruil<span>™</span></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/ip" style="color:#60a5fa;">IP</a>
+    <a href="/contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Intellectual Property</div>
+  <h1>Built to be<br><em>owned, not borrowed.</em></h1>
+  <p>The CYW multi-model AI orchestration architecture is protected by a U.S. provisional patent application. Our brand marks are registered with the USPTO.</p>
+  <div class="hero-marks">
+    <div class="mark-pill">CONTRUIL™ <span>SN 99660773 · USPTO Registered</span></div>
+    <div class="mark-pill">CYW™ <span>SN 99662316 · USPTO Registered</span></div>
+    <div class="mark-pill">Patent Pending <span>U.S. App. No. 63/980,310</span></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="assertions" style="padding-top:60px;">
+  <div class="assertions-grid">
+
+    <div class="assert-card">
+      <div class="icon">⚙️</div>
+      <h3>Patent Pending</h3>
+      <p>The core routing, validation, and enforcement architecture of the CYW platform is covered by a U.S. provisional patent application, establishing a priority date for claims development.</p>
+      <div class="reg"><strong>Application:</strong> U.S. 63/980,310<br><strong>Filed:</strong> February 11, 2026<br><strong>Status:</strong> Provisional · Active</div>
+    </div>
+
+    <div class="assert-card">
+      <div class="icon">™️</div>
+      <h3>Registered Marks</h3>
+      <p>CONTRUIL™ and CYW™ are registered marks of Contruil LLC, filed with the United States Patent and Trademark Office. All brand use requires authorization.</p>
+      <div class="reg"><strong>CONTRUIL™</strong> · SN 99660773<br><strong>CYW™</strong> · SN 99662316<br><strong>Owner:</strong> Contruil LLC</div>
+    </div>
+
+    <div class="assert-card">
+      <div class="icon">🔒</div>
+      <h3>Proprietary Architecture</h3>
+      <p>The system design, routing logic, governance framework, and enforcement pipeline constitute proprietary trade secrets of Contruil LLC and are not licensed or disclosed without written agreement.</p>
+      <div class="reg"><strong>Classification:</strong> Confidential &amp; Proprietary<br><strong>Scope:</strong> Architecture, logic, and implementation<br><strong>Transfer:</strong> None without written license</div>
+    </div>
+
+  </div>
+</section>
+
+<section style="max-width:960px;margin:40px auto 60px;padding:0 48px;">
+  <div class="arch">
+    <div>
+      <h2>A new operating layer for <em>human-led AI.</em></h2>
+      <p>CYW (Control Your World) is a multi-model AI orchestration architecture that routes work intelligently across specialized models — governed by a human-in-the-loop validation framework designed for accountability, auditability, and enforcement.</p>
+      <p>This is not a wrapper. It is an original architectural category — conceived, built, and protected by Contruil LLC.</p>
+      <div class="arch-badges">
+        <span class="arch-badge">Multi-Model Orchestration</span>
+        <span class="arch-badge">Human-Led Governance</span>
+        <span class="arch-badge">Agentic Validation</span>
+        <span class="arch-badge">Audit Chain</span>
+        <span class="arch-badge">VLAN-Style Routing</span>
+      </div>
+    </div>
+    <div class="arch-right">
+      <div class="arch-stat">
+        <div class="label">Patent Status</div>
+        <div class="value">Patent Pending</div>
+        <div class="sub">U.S. Provisional Application No. 63/980,310</div>
+      </div>
+      <div class="arch-stat">
+        <div class="label">Trademarks Filed</div>
+        <div class="value">CONTRUIL™ · CYW™</div>
+        <div class="sub">USPTO Serial Nos. 99660773 &amp; 99662316</div>
+      </div>
+      <div class="arch-stat">
+        <div class="label">Inventor</div>
+        <div class="value">Timothy I. Wheels</div>
+        <div class="sub">Founder &amp; Architect · Contruil LLC</div>
+      </div>
+      <div class="arch-stat">
+        <div class="label">IP Category</div>
+        <div class="value">Original Architecture</div>
+        <div class="sub">Proprietary — not derivative of existing platforms</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="founder">
+  <blockquote>
+    "The architecture behind CYW was built on a core belief: AI should amplify human judgment, not replace it. Every routing decision, every validation gate, every enforcement layer exists to keep the human operator in sovereign control of the outcome. That design philosophy is what we filed to protect."
+  </blockquote>
+  <cite>— Timothy I. Wheels, Founder &amp; Architect, Contruil LLC</cite>
+</section>
+
+<div class="notice">
+  <p>
+    <strong>IP Notice:</strong> CONTRUIL™, CYW™, and all associated product names, logos, and architectural concepts are the exclusive intellectual property of Contruil LLC. Unauthorized use, reproduction, or derivative development of any protected element — including but not limited to the CYW routing architecture, validation framework, and enforcement pipeline — is prohibited without prior written authorization. Patent Pending: U.S. Application No. 63/980,310.
+  </p>
+</div>
+
+<footer>
+  <div class="copy">© 2026 Contruil LLC. All rights reserved.</div>
+  <div class="marks">CONTRUIL™ · CYW™ · Patent Pending 63/980,310</div>
+</footer>
+
+</body>
+</html>

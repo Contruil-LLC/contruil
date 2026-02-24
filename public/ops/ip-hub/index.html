@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Contruil LLC — IP Command Center</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d0f14; color: #e2e8f0; min-height: 100vh; }
+
+  #gate {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; flex-direction: column; gap: 24px;
+    background: radial-gradient(ellipse at center, #0f1923 0%, #0d0f14 70%);
+  }
+  #gate .logo { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #334155; }
+  #gate h1 { font-size: 20px; font-weight: 700; color: #60a5fa; letter-spacing: 0.06em; }
+  #gate p { font-size: 12px; color: #475569; text-align: center; }
+  #gate form { display: flex; flex-direction: column; gap: 12px; width: 300px; }
+  #gate input[type="password"] {
+    background: #111827; border: 1px solid #1f2937; border-radius: 8px;
+    padding: 12px 16px; font-size: 14px; color: #e2e8f0; width: 100%;
+    outline: none; transition: border 0.2s;
+  }
+  #gate input[type="password"]:focus { border-color: #2563eb; }
+  #gate button {
+    background: #1d4ed8; border: none; border-radius: 8px; padding: 12px;
+    font-size: 13px; font-weight: 700; color: #fff; cursor: pointer;
+    letter-spacing: 0.06em; text-transform: uppercase; transition: background 0.2s;
+  }
+  #gate button:hover { background: #2563eb; }
+  #gate .error { font-size: 12px; color: #f87171; text-align: center; min-height: 16px; }
+  #gate .hint { font-size: 11px; color: #374151; text-align: center; margin-top: 8px; }
+
+  #dashboard { display: none; }
+
+  header { background: linear-gradient(135deg, #0f1923 0%, #1a2332 100%); border-bottom: 1px solid #1e3a5f; padding: 28px 40px; display: flex; justify-content: space-between; align-items: center; }
+  header h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.08em; color: #60a5fa; text-transform: uppercase; }
+  header h1 span { color: #94a3b8; font-weight: 400; font-size: 14px; display: block; letter-spacing: 0.04em; margin-top: 3px; }
+  .header-badge { background: #1e3a5f; border: 1px solid #2563eb; border-radius: 6px; padding: 8px 16px; font-size: 12px; color: #60a5fa; text-align: right; line-height: 1.6; }
+  .lock-btn { background: #1f2937; border: 1px solid #374151; border-radius: 6px; padding: 6px 14px; font-size: 11px; color: #6b7280; cursor: pointer; margin-left: 16px; }
+  .lock-btn:hover { color: #f87171; border-color: #7f1d1d; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  .alert-banner { background: linear-gradient(90deg, #1a1000, #241a00); border: 1px solid #b45309; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 14px 20px; margin-bottom: 32px; display: flex; align-items: flex-start; gap: 12px; }
+  .alert-banner p { font-size: 13px; color: #fbbf24; line-height: 1.6; }
+  .alert-banner strong { color: #f59e0b; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 28px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+  .card { background: #111827; border: 1px solid #1f2937; border-radius: 10px; overflow: hidden; }
+  .card-header { padding: 14px 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1f2937; }
+  .card-header .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot-blue { background: #2563eb; } .dot-green { background: #16a34a; } .dot-amber { background: #d97706; }
+  .dot-purple { background: #7c3aed; } .dot-red { background: #dc2626; } .dot-cyan { background: #0891b2; }
+  .card-header h2 { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; }
+  .card-header .label { margin-left: auto; font-size: 10px; padding: 2px 8px; border-radius: 99px; font-weight: 600; letter-spacing: 0.05em; }
+  .label-filed { background: #052e16; color: #4ade80; border: 1px solid #166534; }
+  .label-pending { background: #1c1400; color: #fbbf24; border: 1px solid #92400e; }
+  .label-queued { background: #1e1b4b; color: #a5b4fc; border: 1px solid #3730a3; }
+
+  .card-body { padding: 4px 0; }
+  .file-row { display: flex; align-items: center; padding: 9px 18px; border-bottom: 1px solid #1a2230; text-decoration: none; transition: background 0.15s; gap: 10px; }
+  .file-row:last-child { border-bottom: none; }
+  .file-row:hover { background: #1a2332; }
+  .file-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+  .file-info { flex: 1; min-width: 0; }
+  .file-name { font-size: 13px; color: #cbd5e1; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-meta { font-size: 11px; color: #475569; margin-top: 1px; }
+  .file-tag { font-size: 10px; padding: 1px 7px; border-radius: 99px; font-weight: 600; flex-shrink: 0; }
+  .tag-core { background: #0c1a2e; color: #60a5fa; border: 1px solid #1e3a5f; }
+  .tag-draft { background: #1c1400; color: #fbbf24; border: 1px solid #78350f; }
+  .tag-strategy { background: #0d1117; color: #a78bfa; border: 1px solid #3730a3; }
+  .tag-evidence { background: #051c0a; color: #4ade80; border: 1px solid #14532d; }
+
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #475569; margin: 28px 0 12px; }
+
+  .status-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .status-table th { text-align: left; padding: 8px 12px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #475569; border-bottom: 1px solid #1f2937; font-weight: 600; }
+  .status-table td { padding: 10px 12px; border-bottom: 1px solid #111827; color: #94a3b8; vertical-align: middle; }
+  .status-table tr:last-child td { border-bottom: none; }
+  .status-table tr:hover td { background: #0f1623; }
+  .pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 2px 9px; border-radius: 99px; font-weight: 600; white-space: nowrap; }
+  .pill-green { background: #052e16; color: #4ade80; border: 1px solid #166534; }
+  .pill-amber { background: #1c1400; color: #fbbf24; border: 1px solid #92400e; }
+  .pill-red { background: #1f0808; color: #f87171; border: 1px solid #991b1b; }
+  .pill-blue { background: #0c1a2e; color: #60a5fa; border: 1px solid #1e40af; }
+  .pill::before { content: '●'; font-size: 8px; }
+
+  .deadline-card { background: #1a0a0a; border: 1px solid #7f1d1d; border-radius: 10px; padding: 18px 22px; display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+  .deadline-icon { font-size: 28px; }
+  .deadline-card h3 { font-size: 14px; font-weight: 700; color: #f87171; margin-bottom: 4px; }
+  .deadline-card p { font-size: 12px; color: #9ca3af; line-height: 1.5; }
+  .deadline-date { margin-left: auto; text-align: right; }
+  .deadline-date .big { font-size: 22px; font-weight: 800; color: #f87171; }
+  .deadline-date .small { font-size: 11px; color: #6b7280; }
+
+  .note-box { background: #0f1820; border: 1px solid #1e3a5f; border-radius: 8px; padding: 14px 18px; font-size: 12px; color: #64748b; line-height: 1.7; margin-top: 8px; }
+  .note-box strong { color: #94a3b8; }
+
+  footer { border-top: 1px solid #1f2937; padding: 20px 40px; text-align: center; font-size: 11px; color: #374151; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="logo">Contruil LLC</div>
+  <h1>IP Command Center</h1>
+  <p>Private &amp; Confidential — Authorized Access Only</p>
+  <form id="gate-form" onsubmit="unlock(event)">
+    <input type="password" id="pw" placeholder="Access code" autocomplete="current-password" autofocus>
+    <button type="submit">UNLOCK</button>
+    <div class="error" id="err"></div>
+  </form>
+  <div class="hint">Session persists until you lock or close the tab.</div>
+</div>
+
+<div id="dashboard">
+
+<header>
+  <h1>CONTRUIL LLC
+    <span>IP Command Center &nbsp;·&nbsp; Private &amp; Confidential</span>
+  </h1>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="header-badge">
+      Provisional No. <strong style="color:#60a5fa">63/980,310</strong><br>
+      Filed: Feb 11, 2026 &nbsp;·&nbsp; Window closes: Feb 11, 2027<br>
+      Trademarks filed: <strong style="color:#4ade80">2 of 3</strong>
+    </div>
+    <button class="lock-btn" onclick="lock()">🔒 Lock</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="deadline-card">
+    <div class="deadline-icon">⚠️</div>
+    <div>
+      <h3>Non-Provisional Filing Deadline</h3>
+      <p>Must file non-provisional before this date to claim priority from 63/980,310.<br>
+      Statutory deadline — no extensions. Begin claims drafting and counsel engagement now.</p>
+    </div>
+    <div class="deadline-date">
+      <div class="big">Feb 11, 2027</div>
+      <div class="small">Hard USPTO deadline</div>
+    </div>
+  </div>
+
+  <div class="section-label">Current IP Filing Status</div>
+  <div class="card" style="margin-bottom: 28px;">
+    <div class="card-header">
+      <div class="dot dot-blue"></div>
+      <h2>Active Registrations &amp; Pending Filings</h2>
+    </div>
+    <div class="card-body">
+      <table class="status-table">
+        <thead>
+          <tr><th>Asset</th><th>Type</th><th>Filing ID / Serial</th><th>Status</th><th>Next Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:600">CYW Multi-Model AI Architecture</td>
+            <td>Utility Patent</td><td style="color:#60a5fa">63/980,310</td>
+            <td><span class="pill pill-amber">Provisional Filed</span></td>
+            <td>Non-provisional by Feb 11, 2027</td>
+          </tr>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:600">CONTRUIL™</td>
+            <td>Trademark</td><td style="color:#4ade80">SN 99660773</td>
+            <td><span class="pill pill-green">Filed</span></td>
+            <td>Monitor USPTO status</td>
+          </tr>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:600">CYW™</td>
+            <td>Trademark</td><td style="color:#4ade80">SN 99662316</td>
+            <td><span class="pill pill-green">Filed</span></td>
+            <td>Monitor USPTO status</td>
+          </tr>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:600">VIRGIL POWERED BY CONTRUIL™</td>
+            <td>Trademark</td><td style="color:#a78bfa">—</td>
+            <td><span class="pill pill-blue">Queued to File</span></td>
+            <td>File when funds available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-label">Patent — Provisional &amp; Non-Provisional Prep</div>
+  <div class="grid" style="margin-bottom: 28px;">
+    <div class="card">
+      <div class="card-header"><div class="dot dot-blue"></div><h2>Core Patent Docs</h2><span class="label label-filed">ACTIVE</span></div>
+      <div class="card-body">
+        <a class="file-row" href="Contruil_Invention_Disclosure_Checklist (1).docx"><span class="file-icon">📋</span><div class="file-info"><div class="file-name">Invention Disclosure Checklist</div><div class="file-meta">7 sections · All pages present</div></div><span class="file-tag tag-core">CORE</span></a>
+        <a class="file-row" href="patent-filing-2026/02-PATENT-CLAIMS/provisional_specification_FILING.md"><span class="file-icon">📄</span><div class="file-info"><div class="file-name">Provisional Spec — Filing Version</div><div class="file-meta">02-PATENT-CLAIMS</div></div><span class="file-tag tag-core">CORE</span></a>
+        <a class="file-row" href="patent-filing-2026/02-PATENT-CLAIMS/provisional_specification_DRAFT.md"><span class="file-icon">📝</span><div class="file-info"><div class="file-name">Provisional Spec — Draft</div><div class="file-meta">02-PATENT-CLAIMS</div></div><span class="file-tag tag-draft">DRAFT</span></a>
+        <a class="file-row" href="patent-filing-2026/02-PATENT-CLAIMS/provisional_specification.pdf"><span class="file-icon">🔴</span><div class="file-info"><div class="file-name">Provisional Spec — PDF</div><div class="file-meta">02-PATENT-CLAIMS</div></div><span class="file-tag tag-core">PDF</span></a>
+        <a class="file-row" href="virgil/patent_audit/inventor_disclosure/PRIVATE/Provisional_Draft_v1.md"><span class="file-icon">🔒</span><div class="file-info"><div class="file-name">Provisional Draft v1 (Private)</div><div class="file-meta">inventor_disclosure / PRIVATE</div></div><span class="file-tag tag-core">PRIVATE</span></a>
+        <a class="file-row" href="virgil/patent_audit/inventor_disclosure/PRIVATE/Patent_Candidates.md"><span class="file-icon">🔒</span><div class="file-info"><div class="file-name">Patent Candidates</div><div class="file-meta">inventor_disclosure / PRIVATE</div></div><span class="file-tag tag-core">PRIVATE</span></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot dot-purple"></div><h2>Claims Architecture</h2><span class="label label-pending">IN PROGRESS</span></div>
+      <div class="card-body">
+        <a class="file-row" href="patent-filing-2026/Claim_Boundary_Map.md"><span class="file-icon">🗺️</span><div class="file-info"><div class="file-name">Claim Boundary Map</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">STRATEGY</span></a>
+        <a class="file-row" href="patent-filing-2026/Claim_Scaffolding_Design.md"><span class="file-icon">📐</span><div class="file-info"><div class="file-name">Claim Scaffolding Design</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">STRATEGY</span></a>
+        <a class="file-row" href="patent-filing-2026/Claim_Scaffolding_Language.md"><span class="file-icon">📐</span><div class="file-info"><div class="file-name">Claim Scaffolding Language</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-draft">DRAFT</span></a>
+        <a class="file-row" href="patent-filing-2026/02-PATENT-CLAIMS/Routing_Engine_Section_Patent_Grade.md"><span class="file-icon">⚙️</span><div class="file-info"><div class="file-name">Routing Engine — Patent Grade</div><div class="file-meta">02-PATENT-CLAIMS</div></div><span class="file-tag tag-core">CORE</span></a>
+        <a class="file-row" href="patent-filing-2026/02-PATENT-CLAIMS/Four_Gate_FSM_Section_Formal_Spec.md"><span class="file-icon">⚙️</span><div class="file-info"><div class="file-name">Four-Gate FSM Formal Spec</div><div class="file-meta">02-PATENT-CLAIMS</div></div><span class="file-tag tag-core">CORE</span></a>
+        <a class="file-row" href="patent-filing-2026/02-PATENT-CLAIMS/FIGURE_DESCRIPTIONS.md"><span class="file-icon">🖼️</span><div class="file-info"><div class="file-name">Figure Descriptions</div><div class="file-meta">02-PATENT-CLAIMS</div></div><span class="file-tag tag-draft">DRAFT</span></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot dot-amber"></div><h2>Prior Art &amp; Risk Analysis</h2></div>
+      <div class="card-body">
+        <a class="file-row" href="patent-filing-2026/Novelty_Delta_Matrix_Rigorous.md"><span class="file-icon">🔬</span><div class="file-info"><div class="file-name">Novelty Delta Matrix</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">ANALYSIS</span></a>
+        <a class="file-row" href="patent-filing-2026/Prior_Art_Stress_Test_Structured.md"><span class="file-icon">🔬</span><div class="file-info"><div class="file-name">Prior Art Stress Test</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">ANALYSIS</span></a>
+        <a class="file-row" href="patent-filing-2026/Obviousness_Stress_Test.md"><span class="file-icon">🔬</span><div class="file-info"><div class="file-name">Obviousness Stress Test</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">ANALYSIS</span></a>
+        <a class="file-row" href="patent-filing-2026/USPTO_Differentiation_Chart.md"><span class="file-icon">📊</span><div class="file-info"><div class="file-name">USPTO Differentiation Chart</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">ANALYSIS</span></a>
+        <a class="file-row" href="patent-filing-2026/Disclosure_Risk_Audit.md"><span class="file-icon">⚡</span><div class="file-info"><div class="file-name">Disclosure Risk Audit</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">RISK</span></a>
+        <a class="file-row" href="patent-filing-2026/Boundary_Differentiation_Matrix.md"><span class="file-icon">📊</span><div class="file-info"><div class="file-name">Boundary Differentiation Matrix</div><div class="file-meta">patent-filing-2026</div></div><span class="file-tag tag-strategy">ANALYSIS</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Trademarks</div>
+  <div class="grid grid-2" style="margin-bottom: 28px;">
+    <div class="card">
+      <div class="card-header"><div class="dot dot-green"></div><h2>Filed Trademarks</h2><span class="label label-filed">2 FILED</span></div>
+      <div class="card-body">
+        <a class="file-row" href="virgil/legal/trademark/SERIAL_NUMBER_REGISTRY.md"><span class="file-icon">🔢</span><div class="file-info"><div class="file-name">Serial Number Registry</div><div class="file-meta">SN 99660773 · SN 99662316</div></div><span class="file-tag tag-core">CORE</span></a>
+        <a class="file-row" href="virgil/legal/trademark/TRADEMARK_EVIDENCE_LOG.md"><span class="file-icon">📂</span><div class="file-info"><div class="file-name">Trademark Evidence Log</div></div><span class="file-tag tag-evidence">EVIDENCE</span></a>
+        <a class="file-row" href="virgil/legal/trademark/TRADEMARK_DEPLOYMENT.md"><span class="file-icon">🚀</span><div class="file-info"><div class="file-name">Trademark Deployment Guide</div></div><span class="file-tag tag-strategy">GUIDE</span></a>
+        <a class="file-row" href="virgil/legal/trademark/CONTRUIL_BRAND_USAGE_STANDARD.md"><span class="file-icon">🎨</span><div class="file-info"><div class="file-name">Brand Usage Standard</div></div><span class="file-tag tag-core">STANDARD</span></a>
+        <a class="file-row" href="virgil/legal/trademark/TRADEMARK_24H_ACTION_PLAN.md"><span class="file-icon">⏱️</span><div class="file-info"><div class="file-name">24-Hour Action Plan</div></div><span class="file-tag tag-strategy">OPS</span></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot dot-purple"></div><h2>Virgil Trademark — Queued</h2><span class="label label-queued">PLANNED</span></div>
+      <div class="card-body">
+        <div class="file-row" style="cursor:default;opacity:0.6;"><span class="file-icon">⏳</span><div class="file-info"><div class="file-name">VIRGIL POWERED BY CONTRUIL™</div><div class="file-meta">Target mark — not yet filed</div></div><span class="file-tag tag-draft">PLANNED</span></div>
+        <a class="file-row" href="virgil/legal/trademark/REMINDERS_AND_FILTERS.md"><span class="file-icon">🔔</span><div class="file-info"><div class="file-name">Reminders &amp; Filters</div></div><span class="file-tag tag-strategy">OPS</span></a>
+        <a class="file-row" href="virgil/legal/trademark/RECOGNITION_ASSET_REGISTER.md"><span class="file-icon">📋</span><div class="file-info"><div class="file-name">Recognition Asset Register</div></div><span class="file-tag tag-evidence">REGISTER</span></a>
+        <div class="note-box" style="margin:8px 12px 12px;">
+          <strong>Note:</strong> File before any public mention of the Virgil mark. Priority is below the Feb 11, 2027 non-provisional deadline but should not be indefinitely deferred.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Defensive Publication &amp; IP Strategy</div>
+  <div class="grid grid-2" style="margin-bottom: 28px;">
+    <div class="card">
+      <div class="card-header"><div class="dot dot-cyan"></div><h2>Defensive Publication</h2><span class="label label-filed">PUBLISHED</span></div>
+      <div class="card-body">
+        <a class="file-row" href="Contruil-LLC_CYW-Defensive-Publication-2025_ Defensive publication establishing prior art for Control Your World (CYW) multi-model AI orchestration architecture. Inventor_ Timothy I. Wheels. Priority date_ December 30, 2025..html"><span class="file-icon">🌐</span><div class="file-info"><div class="file-name">CYW Defensive Publication (HTML)</div><div class="file-meta">Priority date: Dec 30, 2025</div></div><span class="file-tag tag-evidence">PUB</span></a>
+        <a class="file-row" href="virgil/patent_audit/inventor_disclosure/PUBLIC/Defensive_Publication.md"><span class="file-icon">📄</span><div class="file-info"><div class="file-name">Defensive Publication (MD)</div></div><span class="file-tag tag-evidence">PUB</span></a>
+        <a class="file-row" href="patent-filing-2026/Patent_vs_Defensive_Pub_Comparison.md"><span class="file-icon">⚖️</span><div class="file-info"><div class="file-name">Patent vs Defensive Pub Comparison</div></div><span class="file-tag tag-strategy">STRATEGY</span></a>
+        <a class="file-row" href="patent-filing-2026/Defensive_Pub_Scope_Leakage_Audit.md"><span class="file-icon">🔍</span><div class="file-info"><div class="file-name">Defensive Pub Scope Leakage Audit</div></div><span class="file-tag tag-strategy">RISK</span></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot dot-amber"></div><h2>IP Strategy</h2></div>
+      <div class="card-body">
+        <a class="file-row" href="patent-filing-2026/Patent_Pending_Positioning_Strategy.md"><span class="file-icon">🎯</span><div class="file-info"><div class="file-name">Patent Pending Positioning Strategy</div></div><span class="file-tag tag-strategy">STRATEGY</span></a>
+        <a class="file-row" href="patent-filing-2026/Precision_Filing.md"><span class="file-icon">🎯</span><div class="file-info"><div class="file-name">Precision Filing Plan</div></div><span class="file-tag tag-strategy">STRATEGY</span></a>
+        <a class="file-row" href="virgil/patent_audit/transmittal_letter_ip_strategy_memo.md"><span class="file-icon">📬</span><div class="file-info"><div class="file-name">IP Strategy Memo</div></div><span class="file-tag tag-strategy">MEMO</span></a>
+        <a class="file-row" href="virgil/patent_audit/cyw_ip_timeline.md"><span class="file-icon">📅</span><div class="file-info"><div class="file-name">CYW IP Timeline</div></div><span class="file-tag tag-core">TIMELINE</span></a>
+        <a class="file-row" href="patent-filing-2026/Pre_Launch_Filing_Mandate.md"><span class="file-icon">🚨</span><div class="file-info"><div class="file-name">Pre-Launch Filing Mandate</div></div><span class="file-tag tag-core">MANDATE</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">CYW / Contruil / Virgil Product Docs</div>
+  <div class="grid" style="margin-bottom: 28px;">
+    <div class="card">
+      <div class="card-header"><div class="dot dot-blue"></div><h2>CYW Foundation Docs</h2></div>
+      <div class="card-body">
+        <a class="file-row" href="CYW SYSTEMS CONSTITUTION.docx"><span class="file-icon">📜</span><div class="file-info"><div class="file-name">CYW Systems Constitution</div></div><span class="file-tag tag-core">CORE</span></a>
+        <a class="file-row" href="CYW APP ECOSYSTEM MAP.docx"><span class="file-icon">🗺️</span><div class="file-info"><div class="file-name">CYW App Ecosystem Map</div></div><span class="file-tag tag-core">CORE</span></a>
+        <a class="file-row" href="CYW EXPANSION AUTOMATION SYSTEM.docx"><span class="file-icon">⚡</span><div class="file-info"><div class="file-name">CYW Expansion Automation System</div></div><span class="file-tag tag-strategy">SYSTEM</span></a>
+        <a class="file-row" href="CYW HERD HANDBOOK.docx"><span class="file-icon">📖</span><div class="file-info"><div class="file-name">CYW HERD Handbook</div></div><span class="file-tag tag-strategy">OPS</span></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot dot-purple"></div><h2>Virgil Product Docs</h2></div>
+      <div class="card-body">
+        <a class="file-row" href="virgil/Deep_Specs_SDA_v1.0.pdf"><span class="file-icon">🔴</span><div class="file-info"><div class="file-name">Deep Specs SDA v1.0</div></div><span class="file-tag tag-core">SPEC</span></a>
+        <a class="file-row" href="virgil/deep_specs_deployment.md"><span class="file-icon">🚀</span><div class="file-info"><div class="file-name">Deep Specs Deployment</div></div><span class="file-tag tag-core">SPEC</span></a>
+        <a class="file-row" href="virgil/CYW_Pitch_Packet/"><span class="file-icon">📁</span><div class="file-info"><div class="file-name">CYW Pitch Packet</div></div><span class="file-tag tag-strategy">PITCH</span></a>
+        <a class="file-row" href="virgil/for-contruil-architecture/"><span class="file-icon">📁</span><div class="file-info"><div class="file-name">Contruil Architecture Folder</div></div><span class="file-tag tag-core">FOLDER</span></a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="dot dot-green"></div><h2>Counsel &amp; Intake</h2></div>
+      <div class="card-body">
+        <a class="file-row" href="virgil/patent_audit/patent_counsel_intake.md"><span class="file-icon">⚖️</span><div class="file-info"><div class="file-name">Patent Counsel Intake</div></div><span class="file-tag tag-core">LEGAL</span></a>
+        <a class="file-row" href="virgil/patent_audit/cover_letter_pro_bono.md"><span class="file-icon">✉️</span><div class="file-info"><div class="file-name">Pro Bono Cover Letter</div></div><span class="file-tag tag-draft">DRAFT</span></a>
+        <a class="file-row" href="virgil/patent_audit/attorney_intake_v1/"><span class="file-icon">📁</span><div class="file-info"><div class="file-name">Attorney Intake Packet v1</div></div><span class="file-tag tag-core">LEGAL</span></a>
+        <a class="file-row" href="virgil/patent_audit/final_packet/"><span class="file-icon">📁</span><div class="file-info"><div class="file-name">Final Packet</div></div><span class="file-tag tag-core">FINAL</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Mobility Unlock Gate Status</div>
+  <div class="card" style="margin-bottom:28px;">
+    <div class="card-header"><div class="dot dot-red"></div><h2>5 Gates — All GREEN before accepting AI-adjacent contracts without carve-out</h2></div>
+    <div class="card-body">
+      <table class="status-table">
+        <thead><tr><th>Gate</th><th>Status</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td style="color:#e2e8f0">Non-provisional filed (or in-progress with counsel)</td><td><span class="pill pill-red">Pending</span></td><td>Feb 11, 2027</td></tr>
+          <tr><td style="color:#e2e8f0">Minimum 3 months runway from non-overlapping income</td><td><span class="pill pill-red">Pending</span></td><td>Month 2 target</td></tr>
+          <tr><td style="color:#e2e8f0">VIRGIL ENGINE BY CONTRUIL™ trademark filed</td><td><span class="pill pill-blue">Queued</span></td><td>When funds allow</td></tr>
+          <tr><td style="color:#e2e8f0">Signed carve-out OR role confirmed non-overlapping</td><td><span class="pill pill-amber">Per contract</span></td><td>Before each engagement</td></tr>
+          <tr><td style="color:#e2e8f0">IP ledger current — filings, attestations, logs up to date</td><td><span class="pill pill-amber">In Progress</span></td><td>Ongoing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>Password:</strong> To change the access code, tell Claude your new password and it will update the hash in this file directly — no manual editing needed.
+  </div>
+
+</div>
+<footer>CONTRUIL LLC — CONFIDENTIAL &amp; PROPRIETARY — NOT FOR EXTERNAL DISTRIBUTION &nbsp;·&nbsp; Provisional 63/980,310 active</footer>
+</div>
+
+<script>
+// ─── PASSWORD CONFIG ───────────────────────────────────────────────────────
+// To change: tell Claude your new password and it will update this hash for you.
+const HASH = "a53bbc2b20331b356c31ac502b1df4dcb99482f1ed7c627b5e435c7f2e80bf8b";
+// ──────────────────────────────────────────────────────────────────────────
+
+async function hashPw(pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+  return [...new Uint8Array(buf)].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+
+async function unlock(e) {
+  e.preventDefault();
+  const pw = document.getElementById('pw').value;
+  const h  = await hashPw(pw);
+  if (h === HASH) {
+    sessionStorage.setItem('cyw_ip_auth', '1');
+    show();
+  } else {
+    document.getElementById('err').textContent = 'Incorrect access code.';
+    document.getElementById('pw').value = '';
+    document.getElementById('pw').focus();
+  }
+}
+
+function show() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+}
+
+function lock() {
+  sessionStorage.removeItem('cyw_ip_auth');
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('gate').style.display = 'flex';
+  document.getElementById('pw').value = '';
+  document.getElementById('pw').focus();
+}
+
+if (sessionStorage.getItem('cyw_ip_auth') === '1') show();
+</script>
+</body>
+</html>
