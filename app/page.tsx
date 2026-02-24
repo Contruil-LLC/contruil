@@ -89,7 +89,7 @@ export default function Home() {
               </div>
               <div>
                 <a
-                  href="/shared-responsibility-matrix.html"
+                  href="/shared-responsibility-matrix"
                   className="inline-block px-6 py-3 border border-white/20 text-brand-muted font-medium rounded-md hover:bg-white/5 hover:text-white transition-colors text-center"
                 >
                   Cloud Responsibility Matrix
@@ -367,9 +367,12 @@ export default function Home() {
             <a href="/workplace-policy" className="hover:text-white transition-colors">
               Workplace Policy
             </a>
-            <a href="/shared-responsibility-matrix.html" className="hover:text-white transition-colors">
+            <a href="/shared-responsibility-matrix" className="hover:text-white transition-colors">
               Cloud Responsibility Matrix
             </a>
+          <a href="/ip" className="hover:text-white transition-colors">
+            IP Portfolio
+          </a>
             <a href="https://cyw-os.com" className="hover:text-white transition-colors">
               CYW OS
             </a>
