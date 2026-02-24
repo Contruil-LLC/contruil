@@ -262,7 +262,7 @@ export default function ServicePath() {
             <a href="/" className="hover:text-white transition-colors">
               Home
             </a>
-            <a href="/shared-responsibility-matrix.html" className="hover:text-white transition-colors">
+            <a href="/shared-responsibility-matrix" className="hover:text-white transition-colors">
               Cloud Responsibility Matrix
             </a>
             <a href="https://cyw-os.com" className="hover:text-white transition-colors">
