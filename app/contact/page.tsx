@@ -40,9 +40,9 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto grid md:grid-cols-[1fr_320px] gap-16">
 
           {/* Form */}
-          {/* To activate: create a free form at formspree.io, then replace FORMSPREE_FORM_ID below */}
+          {/* To activate: create a free form at formspree.io, then replace mqedgvqp below */}
           <form
-            action="https://formspree.io/f/FORMSPREE_FORM_ID"
+            action="https://formspree.io/f/mqedgvqp"
             method="POST"
             className="space-y-6"
           >
