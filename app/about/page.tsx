@@ -22,6 +22,12 @@ export default function AboutPage() {
               Home
             </Link>
             <Link
+              href="/tools"
+              className="text-sm text-brand-muted hover:text-white transition-colors"
+            >
+              Tools
+            </Link>
+            <Link
               href="/pilot-fit-call"
               className="text-sm px-4 py-2 bg-brand-accent text-white rounded-md hover:bg-blue-600 transition-colors"
             >

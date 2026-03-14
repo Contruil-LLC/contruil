@@ -37,6 +37,9 @@ export default function ServicePath() {
             >
               Compliance
             </a>
+            <a href="/tools" className="hover:text-white transition-colors">
+              Tools
+            </a>
             <a
               href="mailto:timothy@contruil.com"
               className="px-4 py-2 bg-brand-accent text-white rounded-md hover:bg-blue-600 transition-colors"

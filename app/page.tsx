@@ -17,6 +17,7 @@ export default function Home() {
             <a href="/what-we-do" className="hover:text-white transition-colors">What We Do</a>
             <a href="/how-it-works" className="hover:text-white transition-colors">How It Works</a>
             <a href="/faq" className="hover:text-white transition-colors">FAQ</a>
+            <a href="/tools" className="hover:text-white transition-colors">Tools</a>
           </div>
           <a
             href="/pilot-fit-call"
